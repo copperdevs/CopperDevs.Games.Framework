@@ -4,6 +4,9 @@ public static class Program
 {
     public static void Main()
     {
-        Console.WriteLine("Hello, World!");
+        var settings = new EngineSettings();
+        
+        using var game = new Game(settings);
+        game.Run();
     }
 }
