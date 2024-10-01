@@ -30,4 +30,16 @@ public class Game(EngineSettings settings) : Scope
             }
         }
     }
+
+    public void SpawnSystem<TSystem, TType>() 
+        where TType : struct 
+        where TSystem : BaseSystem<TType>, new()
+    {
+        var system = new TSystem();
+        // system.Update();
+
+        var entity = EcsWorld.Spawn().Add<SystemTracker>();
+        entity.Add<EntityID>(entity.GetHashCode());
+    }
+    internal readonly struct SystemTracker;
 }
