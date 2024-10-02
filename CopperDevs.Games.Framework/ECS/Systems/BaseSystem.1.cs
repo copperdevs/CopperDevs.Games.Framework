@@ -1,6 +1,7 @@
 ﻿namespace CopperDevs.Games.Framework.ECS.Systems;
 
-public abstract class BaseSystem<T1>(SystemStreamType streamType) : ISystem where T1 : notnull, new()
+public abstract class BaseSystem<T1>(SystemStreamType streamType) : ISystem
+    where T1 : notnull, new()
 {
     public abstract void Update(ref T1 component);
 
@@ -11,10 +12,12 @@ public abstract class BaseSystem<T1>(SystemStreamType streamType) : ISystem wher
         switch (streamType)
         {
             case SystemStreamType.For:
-                stream.For((ref T1 component) => Update(ref component));
+                stream.For((ref T1 component) =>
+                    Update(ref component));
                 break;
             case SystemStreamType.Job:
-                stream.Job((ref T1 component) => Update(ref component));
+                stream.Job((ref T1 component) =>
+                    Update(ref component));
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(streamType), streamType, null);
