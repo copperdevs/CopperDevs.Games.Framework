@@ -16,7 +16,7 @@ public static class Program
 
         game.EcsWorld.Spawn().Add<Test>().Add<Name>("greg");
 
-        game.SpawnSystem<TestSystem, Test>();
+        game.SpawnSystem<TestSystem, Test, Game.FrameUpdateSystem>();
     }
 
     public static void TestMethod<T>() where T : struct
