@@ -19,7 +19,7 @@ public static class Program
     private static void OnGameStart(Game game)
     {
         using var spawner = game.CreateEntity()
-            .Add(new Position())
+            .Add<Position>()
             .Spawn(100);
 
         game.SpawnSystem<RandomMover, Position, SystemTypes.FrameUpdate>();
