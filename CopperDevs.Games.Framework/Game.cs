@@ -31,8 +31,6 @@ public partial class Game : Scope
 
     public void Run()
     {
-        SystemsRun();
-
         OnGameStart?.Invoke(this);
 
         RenderingRun();
