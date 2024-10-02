@@ -5,7 +5,7 @@ using Raylib_CSharp.Windowing;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
-public struct Bunny()
+public struct Bunny
 {
     public Vector2 Position;
 

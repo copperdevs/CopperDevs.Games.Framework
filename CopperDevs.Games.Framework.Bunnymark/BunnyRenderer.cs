@@ -1,8 +1,5 @@
-﻿using System.Numerics;
-using CopperDevs.Games.Framework.ECS;
-using CopperDevs.Logger;
+﻿using CopperDevs.Games.Framework.ECS;
 using Raylib_CSharp.Rendering;
-using Raylib_CSharp.Textures;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 

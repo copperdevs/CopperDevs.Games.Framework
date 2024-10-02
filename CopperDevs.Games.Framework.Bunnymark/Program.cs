@@ -1,8 +1,6 @@
-﻿using System.Numerics;
-using CopperDevs.Core.Data;
+﻿using CopperDevs.Core.Data;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS;
-using CopperDevs.Logger;
 using Raylib_CSharp;
 using Raylib_CSharp.Colors;
 using Raylib_CSharp.Images;
@@ -41,7 +39,7 @@ public static class Program
 
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
-        Game.EcsWorld.Query<Bunny>().Stream().For(static (ref Bunny bunny) => bunny.SetValues());
+        Game.EcsWorld.Query<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetValues());
 
         game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate>();
         game.SpawnSystem<BunnyRenderer, Bunny, SystemTypes.FrameUpdate>();
@@ -55,7 +53,11 @@ public static class Program
 
         stream?.CopyTo(ms);
 
-        BunnyTexture = Texture2D.LoadFromImage(Image.LoadFromMemory(".png", ms.ToArray()));
+        var image = Image.LoadFromMemory(".png", ms.ToArray());
+        
+        BunnyTexture = Texture2D.LoadFromImage(image);
+        
+        image.Unload();
     }
 
     private static void GameRender()
@@ -70,7 +72,7 @@ public static class Program
 
         if (Input.IsMouseButtonDown(MouseButton.Left))
         {
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 1000; i++)
             {
                 var bunny = new Bunny();
 
