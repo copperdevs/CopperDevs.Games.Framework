@@ -1,59 +1,39 @@
-using CopperDevs.Core.Utility;
+﻿using CopperDevs.Core.Utility;
 using CopperDevs.Games.Framework.Data;
-using CopperDevs.Games.Framework.ECS.Components;
-using CopperDevs.Games.Framework.ECS.Systems;
 using CopperDevs.Games.Framework.Rendering;
-using fennecs;
-using Raylib_CSharp.Colors;
-using Raylib_CSharp.Rendering;
+using CopperDevs.Games.Framework.Utility;
 
 namespace CopperDevs.Games.Framework;
 
-public class Game(EngineSettings settings) : Scope
+public partial class Game : Scope
 {
-    internal static readonly World EcsWorld = new();
-    private EngineWindow Window = null!;
-    private readonly SystemsManager SystemsManager = new();
+    private readonly EngineSettings settings;
 
     public Action<Game> OnGameStart = null!;
+
+    public Game(EngineSettings settings)
+    {
+        RaylibLogger.Initialize();
+
+        this.settings = settings;
+
+        GameRenderer = new GameRenderer();
+        GameRenderer.OnRender += BaseRendering;
+        GameRenderer.OnUiRender += UiRendering;
+    }
 
     protected override void CloseScope()
     {
         EcsWorld.Dispose();
+        ImGuiRendering.Dispose();
     }
 
     public void Run()
     {
-        SpawnSystemManagersSystem();
+        SystemsRun();
 
         OnGameStart?.Invoke(this);
 
-        using (Window = new EngineWindow(settings))
-        {
-            while (!Window.ShouldClose)
-            {
-                Graphics.ClearBackground(Color.RayWhite);
-                Graphics.BeginDrawing();
-
-                Graphics.DrawText("hello world!", 12, 12, 24, Color.Black);
-
-                Graphics.EndDrawing();
-            }
-        }
-    }
-
-    private void SpawnSystemManagersSystem()
-    {
-        SystemsManager.AddSystemType<FrameUpdateSystem>();
-    }
-
-    public void SpawnSystem<TSystem, TType, TSystemType>()
-        where TSystem : BaseSystem<TType>, ISystem, new()
-        where TType : notnull, new()
-        where TSystemType : SystemType
-    {
-        BaseSystem<TType> system = new TSystem();
-
-        SystemsManager.AddSystem<TSystem, TType, TSystemType>((TSystem)system);
+        RenderingRun();
     }
 }

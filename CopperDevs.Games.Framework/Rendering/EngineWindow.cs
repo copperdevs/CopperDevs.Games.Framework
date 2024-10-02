@@ -14,15 +14,25 @@ public class EngineWindow : Scope
     {
         Raylib.SetConfigFlags(settings.WindowFlags);
         Window.Init(settings.WindowSize.X, settings.WindowSize.Y, settings.Title);
-    }
-
-    public void Close()
-    {
-        Window.Close();
+        DwmCustomization();
     }
 
     protected override void CloseScope()
     {
         Window.Close();
+    }
+
+    private void DwmCustomization()
+    {
+        if (!WindowsApi.IsWindows11)
+            return;
+        
+        // WindowsApi.OnWindowResize += OnWindowsApiWindowResize;
+
+        WindowsApi.SetDwmImmersiveDarkMode(Handle, true);
+        WindowsApi.SetDwmSystemBackdropType(Handle, WindowsApi.SystemBackdropType.Acrylic);
+        WindowsApi.SetDwmWindowCornerPreference(Handle, WindowsApi.WindowCornerPreference.Default);
+        
+        // WindowsApi.RegisterWindow(Handle);
     }
 }
