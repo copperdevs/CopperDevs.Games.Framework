@@ -1,8 +1,9 @@
 using CopperDevs.Core.Utility;
+using CopperDevs.Games.Framework.Data;
 using Raylib_CSharp;
 using Raylib_CSharp.Windowing;
 
-namespace CopperDevs.Games.Framework;
+namespace CopperDevs.Games.Framework.Rendering;
 
 public class EngineWindow : Scope
 {

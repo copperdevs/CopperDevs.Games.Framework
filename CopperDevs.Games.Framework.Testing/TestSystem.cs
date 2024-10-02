@@ -1,8 +1,11 @@
-﻿namespace CopperDevs.Games.Framework.Testing;
+﻿using CopperDevs.Games.Framework.ECS.Components;
+using CopperDevs.Games.Framework.ECS.Systems;
 
-public class TestSystem : BaseSystem<Program.Test> 
+namespace CopperDevs.Games.Framework.Testing;
+
+public class TestSystem() : BaseSystem<Position>(SystemStreamType.Job)
 {
-    public override void Update(ref Program.Test component)
+    public override void Update(ref Position component)
     {
         
     }

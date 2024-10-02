@@ -1,5 +1,5 @@
-﻿using CopperDevs.Core.Utility;
-using CopperDevs.Logger;
+﻿using CopperDevs.Games.Framework.Data;
+using CopperDevs.Games.Framework.ECS.Components;
 
 namespace CopperDevs.Games.Framework.Testing;
 
@@ -10,18 +10,13 @@ public static class Program
         var settings = new EngineSettings();
 
         using var game = new Game(settings);
+        game.OnGameStart += OnGameStart;
+        
         game.Run();
-
-        TestMethod<Test>();
-
-        game.EcsWorld.Spawn().Add<Test>().Add<Name>("greg");
-
-        game.SpawnSystem<TestSystem, Test, Game.FrameUpdateSystem>();
     }
 
-    public static void TestMethod<T>() where T : struct
+    private static void OnGameStart(Game game)
     {
+        game.SpawnSystem<TestSystem, Position, FrameUpdateSystem>();
     }
-
-    public readonly struct Test;
 }

@@ -2,7 +2,7 @@ using System.Reflection;
 using CopperDevs.Core.Data;
 using Raylib_CSharp.Windowing;
 
-namespace CopperDevs.Games.Framework;
+namespace CopperDevs.Games.Framework.Data;
 
 public class EngineSettings
 {

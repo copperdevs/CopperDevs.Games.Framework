@@ -1,17 +1,21 @@
 using CopperDevs.Core.Utility;
+using CopperDevs.Games.Framework.Data;
+using CopperDevs.Games.Framework.ECS.Components;
+using CopperDevs.Games.Framework.ECS.Systems;
+using CopperDevs.Games.Framework.Rendering;
 using fennecs;
 using Raylib_CSharp.Colors;
 using Raylib_CSharp.Rendering;
-using Random = CopperDevs.Core.Utility.Random;
 
 namespace CopperDevs.Games.Framework;
 
 public class Game(EngineSettings settings) : Scope
 {
-    private static readonly System.Random Random = new(new Guid().GetHashCode());
+    internal static readonly World EcsWorld = new();
+    private EngineWindow Window = null!;
+    private readonly SystemsManager SystemsManager = new();
 
-    public readonly World EcsWorld = new();
-    public EngineWindow Window = null!;
+    public Action<Game> OnGameStart = null!;
 
     protected override void CloseScope()
     {
@@ -21,6 +25,8 @@ public class Game(EngineSettings settings) : Scope
     public void Run()
     {
         SpawnSystemManagersSystem();
+
+        OnGameStart?.Invoke(this);
 
         using (Window = new EngineWindow(settings))
         {
@@ -38,47 +44,16 @@ public class Game(EngineSettings settings) : Scope
 
     private void SpawnSystemManagersSystem()
     {
-        SpawnSystemManager<FrameUpdateSystem>();
-
-        return;
-
-        void SpawnSystemManager<TSystemType>() where TSystemType : notnull, new()
-        {
-            var id = Random.Next(int.MinValue, int.MaxValue);
-
-            var entity = EcsWorld.Spawn()
-                .Add<SystemTracker>()
-                .Add<TSystemType>();
-            entity.Add<EntityID>(id);
-
-            Systems.Add(id, []);
-        }
+        SystemsManager.AddSystemType<FrameUpdateSystem>();
     }
 
-    private static readonly Dictionary<int, List<object>> Systems = new();
-
     public void SpawnSystem<TSystem, TType, TSystemType>()
-        where TSystem : BaseSystem<TType>, new()
+        where TSystem : BaseSystem<TType>, ISystem, new()
         where TType : notnull, new()
         where TSystemType : SystemType
     {
-        var system = new TSystem();
-        // system.Update();
+        BaseSystem<TType> system = new TSystem();
 
-        var entity = EcsWorld.Spawn().Add<SystemTracker>();
-        entity.Add<EntityID>(entity.GetHashCode());
-
-        var targetSystem = EcsWorld.Query<EntityID>()
-            .Has<SystemTracker>()
-            .Has<TSystemType>()
-            .Stream();
-
-        targetSystem.For((ref EntityID id) => Systems[id].Add(system));
+        SystemsManager.AddSystem<TSystem, TType, TSystemType>((TSystem)system);
     }
-
-    internal readonly struct SystemTracker;
-
-    public record SystemType;
-
-    public sealed record FrameUpdateSystem : SystemType;
 }
