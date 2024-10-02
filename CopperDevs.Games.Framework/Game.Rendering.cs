@@ -15,7 +15,7 @@ public partial class Game
     {
         using (Window = new EngineWindow(settings))
         {
-            OnGameStart?.Invoke(this);
+            OnGameStart?.Invoke();
             ImGuiRendering = new ImGuiRendering();
 
             while (!Window.ShouldClose)
@@ -27,7 +27,7 @@ public partial class Game
 
     private void BaseRendering()
     {
-        Graphics.DrawFPS(24, 24);
+        
     }
 
     private void UiRendering()

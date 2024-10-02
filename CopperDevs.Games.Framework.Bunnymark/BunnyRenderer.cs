@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using CopperDevs.Games.Framework.ECS;
+using CopperDevs.Logger;
 using Raylib_CSharp.Rendering;
 using Raylib_CSharp.Textures;
 

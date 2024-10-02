@@ -11,7 +11,9 @@ public partial class Game : Scope
     private Stopwatch stopwatch = null!;
     private readonly EngineSettings settings;
 
-    public Action<Game> OnGameStart = null!;
+    public Action OnGameStart = null!;
+    public Action OnRender = null!;
+    public Action OnUiRender = null!;
 
     public Game(EngineSettings settings)
     {
@@ -23,6 +25,8 @@ public partial class Game : Scope
         GameRenderer.OnRender += UpdateSystems;
         GameRenderer.OnRender += BaseRendering;
         GameRenderer.OnUiRender += UiRendering;
+        GameRenderer.OnRender += () => OnRender?.Invoke();
+        GameRenderer.OnUiRender += () => OnUiRender?.Invoke();
     }
 
     protected override void CloseScope()

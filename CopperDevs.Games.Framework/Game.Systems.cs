@@ -5,7 +5,7 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game
 {
-    internal static readonly World EcsWorld = new();
+    public static readonly World EcsWorld = new();
 
     public EntitySpawner CreateEntity() => EcsWorld.Entity();
 

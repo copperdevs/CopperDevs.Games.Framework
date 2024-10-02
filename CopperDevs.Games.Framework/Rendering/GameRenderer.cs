@@ -14,9 +14,8 @@ public class GameRenderer
         Graphics.BeginDrawing();
 
         OnRender?.Invoke();
+        OnUiRender?.Invoke();
 
         Graphics.EndDrawing();
-        
-        OnUiRender?.Invoke();
     }
 }
