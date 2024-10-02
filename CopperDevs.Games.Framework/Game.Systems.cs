@@ -1,7 +1,4 @@
-using System.Diagnostics;
-using CopperDevs.Games.Framework.ECS.Components;
 using CopperDevs.Games.Framework.ECS.Systems;
-using CopperDevs.Logger;
 using fennecs;
 
 namespace CopperDevs.Games.Framework;
@@ -10,20 +7,28 @@ public partial class Game
 {
     internal static readonly World EcsWorld = new();
     
+    public EntitySpawner CreateEntity() => EcsWorld.Entity();
+    
     private void UpdateSystems()
     {
-        // stopwatch = Stopwatch.StartNew();
-        
+        UpdateSystem<SystemTypes.FrameUpdate>();
+    }
+
+    private void UpdateSystem<TSystemType>() where TSystemType : SystemType
+    {
         var stream = EcsWorld
             .Query<SystemHolder>()
-            .Has<FrameUpdateSystem>()
+            .Has<TSystemType>()
             .Stream();
 
-        // Log.Performance($"stream: {stopwatch.Elapsed}");
-        
         stream.For((ref SystemHolder holder) => holder.system.UpdateSystem());
-        
-        // Log.Performance($"for: {stopwatch.Elapsed}");
+    }
+    private void SpawnSystemEntity<TSystemType>(ISystem system) where TSystemType : SystemType, new()
+    {
+        CreateEntity()
+            .Add<TSystemType>()
+            .Add(new SystemHolder(system))
+            .Spawn().Dispose();
     }
 
     public void SpawnSystem<TSystem, TType, TSystemType>()
@@ -31,13 +36,7 @@ public partial class Game
         where TType : notnull, new()
         where TSystemType : SystemType, new()
     {
-        var system = new TSystem();
-
-        CreateEntity()
-            .Add<TSystemType>()
-            .Add(new SystemHolder(system))
-            .Spawn().Dispose();
+        SpawnSystemEntity<TSystemType>(new TSystem());
     }
 
-    public EntitySpawner CreateEntity() => EcsWorld.Entity();
 }

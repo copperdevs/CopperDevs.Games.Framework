@@ -1,5 +1,6 @@
 ﻿using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS.Components;
+using CopperDevs.Games.Framework.ECS.Systems;
 
 namespace CopperDevs.Games.Framework.Testing;
 
@@ -21,7 +22,7 @@ public static class Program
             .Add(new Position())
             .Spawn(100);
 
-        game.SpawnSystem<RandomMover, Position, FrameUpdateSystem>();
-        game.SpawnSystem<RandomRenderer, Position, FrameUpdateSystem>();
+        game.SpawnSystem<RandomMover, Position, SystemTypes.FrameUpdate>();
+        game.SpawnSystem<RandomRenderer, Position, SystemTypes.FrameUpdate>();
     }
 }
