@@ -1,19 +1,14 @@
-﻿using CopperDevs.Games.Framework.ECS.Components;
-using CopperDevs.Games.Framework.ECS.Systems;
+﻿using System.Numerics;
+using CopperDevs.Games.Framework.ECS;
 using Raylib_CSharp.Colors;
 using Raylib_CSharp.Rendering;
-using Random = CopperDevs.Core.Utility.Random;
 
 namespace CopperDevs.Games.Framework.Testing;
 
-public class RandomRenderer() : BaseSystem<Position>(SystemStreamType.For)
+public class RandomRenderer() : BaseSystem<Vector2>(SystemStreamType.For)
 {
-    public override void Update(ref Position component)
+    public override void Update(ref Vector2 component)
     {
-        // var circle = Random.InsideUnitCircle * 8;
-
-        // component.Value += circle;
-
-        Graphics.DrawCircleV(component.Value, 8, Color.Red);
+        Graphics.DrawCircleV(component, 8, Color.Red);
     }
 }

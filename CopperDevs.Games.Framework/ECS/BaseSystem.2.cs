@@ -1,4 +1,4 @@
-﻿namespace CopperDevs.Games.Framework.ECS.Systems;
+﻿namespace CopperDevs.Games.Framework.ECS;
 
 public abstract class BaseSystem<T1, T2>(SystemStreamType streamType) : ISystem
     where T1 : notnull, new()

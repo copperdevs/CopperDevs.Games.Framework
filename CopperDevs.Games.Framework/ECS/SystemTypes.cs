@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace CopperDevs.Games.Framework.ECS.Systems;
+namespace CopperDevs.Games.Framework.ECS;
 
 public record SystemType;
 

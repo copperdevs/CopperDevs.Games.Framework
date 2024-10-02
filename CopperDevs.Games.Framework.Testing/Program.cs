@@ -1,6 +1,6 @@
-﻿using CopperDevs.Games.Framework.Data;
-using CopperDevs.Games.Framework.ECS.Components;
-using CopperDevs.Games.Framework.ECS.Systems;
+﻿using System.Numerics;
+using CopperDevs.Games.Framework.Data;
+using CopperDevs.Games.Framework.ECS;
 
 namespace CopperDevs.Games.Framework.Testing;
 
@@ -19,10 +19,10 @@ public static class Program
     private static void OnGameStart(Game game)
     {
         using var spawner = game.CreateEntity()
-            .Add<Position>()
+            .Add<Vector2>()
             .Spawn(100);
 
-        game.SpawnSystem<RandomMover, Position, SystemTypes.FrameUpdate>();
-        game.SpawnSystem<RandomRenderer, Position, SystemTypes.FrameUpdate>();
+        game.SpawnSystem<RandomMover, Vector2, SystemTypes.FrameUpdate>();
+        game.SpawnSystem<RandomRenderer, Vector2, SystemTypes.FrameUpdate>();
     }
 }

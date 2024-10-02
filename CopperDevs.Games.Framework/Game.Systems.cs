@@ -1,4 +1,4 @@
-using CopperDevs.Games.Framework.ECS.Systems;
+using CopperDevs.Games.Framework.ECS;
 using fennecs;
 
 namespace CopperDevs.Games.Framework;

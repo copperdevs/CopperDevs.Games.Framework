@@ -1,4 +1,4 @@
-﻿namespace CopperDevs.Games.Framework.ECS.Systems;
+﻿namespace CopperDevs.Games.Framework.ECS;
 
 public interface ISystem
 {
