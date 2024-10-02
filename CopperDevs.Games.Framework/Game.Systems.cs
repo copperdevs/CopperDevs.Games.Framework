@@ -1,5 +1,7 @@
+using System.Diagnostics;
 using CopperDevs.Games.Framework.ECS.Components;
 using CopperDevs.Games.Framework.ECS.Systems;
+using CopperDevs.Logger;
 using fennecs;
 
 namespace CopperDevs.Games.Framework;
@@ -7,15 +9,21 @@ namespace CopperDevs.Games.Framework;
 public partial class Game
 {
     internal static readonly World EcsWorld = new();
-
+    
     private void UpdateSystems()
     {
+        // stopwatch = Stopwatch.StartNew();
+        
         var stream = EcsWorld
             .Query<SystemHolder>()
             .Has<FrameUpdateSystem>()
             .Stream();
 
-        stream.For(static (ref SystemHolder holder) => holder.system.UpdateSystem());
+        // Log.Performance($"stream: {stopwatch.Elapsed}");
+        
+        stream.For((ref SystemHolder holder) => holder.system.UpdateSystem());
+        
+        // Log.Performance($"for: {stopwatch.Elapsed}");
     }
 
     public void SpawnSystem<TSystem, TType, TSystemType>()

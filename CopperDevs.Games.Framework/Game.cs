@@ -1,4 +1,5 @@
-﻿using CopperDevs.Core.Utility;
+﻿using System.Diagnostics;
+using CopperDevs.Core.Utility;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.Rendering;
 using CopperDevs.Games.Framework.Utility;
@@ -7,6 +8,7 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game : Scope
 {
+    private Stopwatch stopwatch = null!;
     private readonly EngineSettings settings;
 
     public Action<Game> OnGameStart = null!;
