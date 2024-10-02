@@ -11,4 +11,9 @@
       <ProjectReference Include="..\CopperDevs.Games.Framework\CopperDevs.Games.Framework.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\wabbit_alpha.png" />
+      <EmbeddedResource Include="Resources\wabbit_alpha.png" />
+    </ItemGroup>
+
 </Project>

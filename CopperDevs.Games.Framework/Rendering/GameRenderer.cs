@@ -13,7 +13,6 @@ public class GameRenderer
         Graphics.ClearBackground(Color.RayWhite);
         Graphics.BeginDrawing();
 
-        Graphics.DrawText("hello world!", 12, 12, 24, Color.Black);
         OnRender?.Invoke();
 
         Graphics.EndDrawing();

@@ -11,12 +11,13 @@ public partial class Game
     private readonly GameRenderer GameRenderer;
     private ImGuiRendering ImGuiRendering = null!;
 
-    private void RenderingRun()
+    public void Run()
     {
         using (Window = new EngineWindow(settings))
         {
+            OnGameStart?.Invoke(this);
             ImGuiRendering = new ImGuiRendering();
-            
+
             while (!Window.ShouldClose)
             {
                 GameRenderer.RenderFrame();

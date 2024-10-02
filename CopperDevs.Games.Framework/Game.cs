@@ -30,11 +30,4 @@ public partial class Game : Scope
         EcsWorld.Dispose();
         ImGuiRendering.Dispose();
     }
-
-    public void Run()
-    {
-        OnGameStart?.Invoke(this);
-
-        RenderingRun();
-    }
 }
