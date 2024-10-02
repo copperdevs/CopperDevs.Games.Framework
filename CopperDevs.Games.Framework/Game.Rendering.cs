@@ -1,5 +1,7 @@
 ﻿using CopperDevs.Games.Framework.Rendering;
 using CopperDevs.Games.Framework.Rendering.DearImGui;
+using Raylib_CSharp;
+using Raylib_CSharp.Rendering;
 
 namespace CopperDevs.Games.Framework;
 
@@ -24,6 +26,7 @@ public partial class Game
 
     private void BaseRendering()
     {
+        Graphics.DrawFPS(24, 24);
     }
 
     private void UiRendering()

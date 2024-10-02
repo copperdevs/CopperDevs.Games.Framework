@@ -18,6 +18,7 @@ public partial class Game : Scope
         this.settings = settings;
 
         GameRenderer = new GameRenderer();
+        GameRenderer.OnRender += UpdateSystems;
         GameRenderer.OnRender += BaseRendering;
         GameRenderer.OnUiRender += UiRendering;
     }

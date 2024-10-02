@@ -1,7 +1,8 @@
-﻿namespace CopperDevs.Games.Framework.ECS.Components;
+﻿using System.Numerics;
+
+namespace CopperDevs.Games.Framework.ECS.Components;
 
 public class Position
 {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public Vector2 Value { get; set; } = Vector2.Zero;
 }

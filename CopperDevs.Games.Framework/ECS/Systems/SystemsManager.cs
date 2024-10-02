@@ -18,7 +18,7 @@ public class SystemsManager
         foundSystems?.Add(system);
     }
 
-    public bool HasSystemType<T>(out List<ISystem>? systems) where T : SystemType
+    public bool HasSystemType<T>(out List<ISystem> systems) where T : SystemType
     {
         if (Systems.TryGetValue(typeof(T), out var foundSystems))
         {
@@ -26,7 +26,7 @@ public class SystemsManager
             return true;
         }
 
-        systems = null;
+        systems = null!;
         return false;
     }
 

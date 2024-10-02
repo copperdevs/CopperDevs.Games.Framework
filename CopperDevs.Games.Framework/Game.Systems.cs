@@ -13,6 +13,17 @@ public partial class Game
     {
         SpawnSystemManagersSystem();
     }
+
+    private void UpdateSystems()
+    {
+        if (SystemsManager.HasSystemType<FrameUpdateSystem>(out var frameUpdateSystems))
+        {
+            foreach (var system in frameUpdateSystems)
+            {
+                system.UpdateSystem();
+            }
+        }
+    }
     
     private void SpawnSystemManagersSystem()
     {
@@ -28,4 +39,6 @@ public partial class Game
 
         SystemsManager.AddSystem<TSystem, TType, TSystemType>((TSystem)system);
     }
+
+    public EntitySpawner CreateEntity() => EcsWorld.Entity();
 }

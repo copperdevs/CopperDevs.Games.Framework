@@ -11,12 +11,17 @@ public static class Program
 
         using var game = new Game(settings);
         game.OnGameStart += OnGameStart;
-        
+
         game.Run();
     }
 
     private static void OnGameStart(Game game)
     {
-        game.SpawnSystem<TestSystem, Position, FrameUpdateSystem>();
+        using var spawner = game.CreateEntity()
+            .Add(new Position())
+            .Spawn(100_000);
+
+        game.SpawnSystem<RandomMover, Position, FrameUpdateSystem>();
+        game.SpawnSystem<RandomRenderer, Position, FrameUpdateSystem>();
     }
 }

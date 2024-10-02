@@ -10,5 +10,5 @@ public class EngineSettings
     public Vector2Int WindowSize { get; init; } = new(650, 450);
     public int TargetFps { get; init; } = 0;
     public int FixedTimeStep { get; init; } = 60;
-    public ConfigFlags WindowFlags { get; init; } = ConfigFlags.Msaa4XHint | ConfigFlags.VSyncHint | ConfigFlags.ResizableWindow | ConfigFlags.AlwaysRunWindow;
+    public ConfigFlags WindowFlags { get; init; } = ConfigFlags.Msaa4XHint | ConfigFlags.ResizableWindow | ConfigFlags.AlwaysRunWindow;
 }
