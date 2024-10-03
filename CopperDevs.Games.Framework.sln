@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework", "CopperDevs.Games.Framework\CopperDevs.Games.Framework.csproj", "{57CEC1B7-94D8-4550-81B9-4D75FA46F5F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework", "src\CopperDevs.Games.Framework\CopperDevs.Games.Framework.csproj", "{57CEC1B7-94D8-4550-81B9-4D75FA46F5F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Testing", "CopperDevs.Games.Framework.Testing\CopperDevs.Games.Framework.Testing.csproj", "{B0239E66-40AA-4FB9-871F-889C1308AE2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Testing", "src\CopperDevs.Games.Framework.Testing\CopperDevs.Games.Framework.Testing.csproj", "{B0239E66-40AA-4FB9-871F-889C1308AE2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Bunnymark", "CopperDevs.Games.Framework.Bunnymark\CopperDevs.Games.Framework.Bunnymark.csproj", "{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Bunnymark", "src\CopperDevs.Games.Framework.Bunnymark\CopperDevs.Games.Framework.Bunnymark.csproj", "{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
