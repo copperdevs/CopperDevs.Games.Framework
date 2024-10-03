@@ -5,7 +5,7 @@ using Raylib_CSharp.Rendering;
 
 namespace CopperDevs.Games.Framework.Testing;
 
-public class RandomRenderer : BaseSystem<Vector2>
+public class Vector2Renderer : BaseSystem<Vector2>
 {
     public override void Update(ref Vector2 component)
     {
