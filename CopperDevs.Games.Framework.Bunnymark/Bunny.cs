@@ -13,13 +13,13 @@ public struct Bunny
 
     public Color Color;
 
-    public void SetValues()
+    public void SetDefaultValues()
     {
         Raylib.SetRandomSeed((uint)(Random.Shared.Next(int.MinValue, int.MaxValue) - int.MinValue));
-        SetValues(new Vector2(Raylib.GetRandomValue(0, Window.GetScreenWidth()), Raylib.GetRandomValue(0, Window.GetScreenHeight())));
+        SetDefaultValues(new Vector2(Raylib.GetRandomValue(0, Window.GetScreenWidth()), Raylib.GetRandomValue(0, Window.GetScreenHeight())));
     }
 
-    public void SetValues(Vector2 position)
+    public void SetDefaultValues(Vector2 position)
     {
         Position = position;
 

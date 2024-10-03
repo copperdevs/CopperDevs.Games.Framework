@@ -13,7 +13,7 @@ public class BunnySpawning : Component
             {
                 var bunny = new Bunny();
 
-                bunny.SetValues(Input.GetMousePosition());
+                bunny.SetDefaultValues(Input.GetMousePosition());
 
                 Game.Instance.CreateEntity().Add(bunny).Spawn().Dispose();
             }

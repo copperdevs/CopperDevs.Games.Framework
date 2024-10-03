@@ -1,11 +1,7 @@
 ﻿using CopperDevs.Core.Data;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS;
-using Raylib_CSharp;
-using Raylib_CSharp.Colors;
-using Raylib_CSharp.Images;
-using Raylib_CSharp.Interact;
-using Raylib_CSharp.Rendering;
+using CopperDevs.Games.Framework.Utility;
 using Raylib_CSharp.Textures;
 using Raylib_CSharp.Windowing;
 
@@ -34,31 +30,16 @@ public static class Program
 
     private static void OnGameStart()
     {
-        LoadBunnyImage();
+        BunnyTexture = typeof(Bunny).Assembly.LoadTexture("CopperDevs.Games.Framework.Bunnymark.Resources.wabbit_alpha.png");
 
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
-        game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetValues());
+        game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
 
         game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate, StreamTypes.Job>();
         game.SpawnSystem<BunnyRenderer, Bunny, SystemTypes.FrameUpdate, StreamTypes.For>();
-        
+
         game.AddComponent<UiRendering, StreamTypes.For>();
         game.AddComponent<BunnySpawning, StreamTypes.Job>();
-    }
-
-    private static void LoadBunnyImage()
-    {
-        var stream = typeof(Bunny).Assembly.GetManifestResourceStream("CopperDevs.Games.Framework.Bunnymark.Resources.wabbit_alpha.png");
-
-        using var ms = new MemoryStream();
-
-        stream?.CopyTo(ms);
-
-        var image = Image.LoadFromMemory(".png", ms.ToArray());
-
-        BunnyTexture = Texture2D.LoadFromImage(image);
-
-        image.Unload();
     }
 }
