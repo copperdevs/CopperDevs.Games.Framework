@@ -2,5 +2,5 @@
 
 public interface ISystem
 {
-    protected internal void UpdateSystem();
+    protected internal void UpdateSystem<TStreamType>() where TStreamType : StreamType;
 }

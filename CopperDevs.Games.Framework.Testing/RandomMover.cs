@@ -1,14 +1,13 @@
 ﻿using System.Numerics;
 using CopperDevs.Core.Utility;
 using CopperDevs.Games.Framework.ECS;
-using CopperDevs.Logger;
 using Raylib_CSharp;
 using Raylib_CSharp.Windowing;
 using Random = CopperDevs.Core.Utility.Random;
 
 namespace CopperDevs.Games.Framework.Testing;
 
-public class RandomMover() : BaseSystem<Vector2>(SystemStreamType.Job)
+public class RandomMover : BaseSystem<Vector2>
 {
     public override void Update(ref Vector2 component)
     {
@@ -33,7 +32,5 @@ public class RandomMover() : BaseSystem<Vector2>(SystemStreamType.Job)
         
         if (component.X is float.NaN)
             component.X = 0;
-        
-        Log.Debug(component);
     }
 }

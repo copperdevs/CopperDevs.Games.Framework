@@ -27,7 +27,6 @@ public static class Program
         game = new Game(settings);
 
         game.OnGameStart += OnGameStart;
-        game.OnRender += GameRender;
 
         game.Run();
         game.Dispose();
@@ -39,10 +38,13 @@ public static class Program
 
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
-        Game.EcsWorld.Query<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetValues());
+        game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetValues());
 
-        game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate>();
-        game.SpawnSystem<BunnyRenderer, Bunny, SystemTypes.FrameUpdate>();
+        game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate, StreamTypes.Job>();
+        game.SpawnSystem<BunnyRenderer, Bunny, SystemTypes.FrameUpdate, StreamTypes.For>();
+        
+        game.AddComponent<UiRendering, StreamTypes.For>();
+        game.AddComponent<BunnySpawning, StreamTypes.Job>();
     }
 
     private static void LoadBunnyImage()
@@ -54,32 +56,9 @@ public static class Program
         stream?.CopyTo(ms);
 
         var image = Image.LoadFromMemory(".png", ms.ToArray());
-        
+
         BunnyTexture = Texture2D.LoadFromImage(image);
-        
+
         image.Unload();
-    }
-
-    private static void GameRender()
-    {
-        var count = Game.EcsWorld.Query<Bunny>().Stream().Count;
-
-        Graphics.DrawRectangle(0, 0, Window.GetScreenWidth(), 60, Color.Black);
-        Graphics.DrawText($"bunnies: {count}", 120, 30, 20, Color.Green);
-        Graphics.DrawText($"batched draw calls: {1 + Game.EcsWorld.Query<Bunny>().Stream().Count / RlGl.DefaultBatchBufferElements}", 320, 30, 20, Color.Maroon);
-
-        Graphics.DrawFPS(10, 30);
-
-        if (Input.IsMouseButtonDown(MouseButton.Left))
-        {
-            for (var i = 0; i < 1000; i++)
-            {
-                var bunny = new Bunny();
-
-                bunny.SetValues(Input.GetMousePosition());
-
-                game.CreateEntity().Add(bunny).Spawn().Dispose();
-            }
-        }
     }
 }

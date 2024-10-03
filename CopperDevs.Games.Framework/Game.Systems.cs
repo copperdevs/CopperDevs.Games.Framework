@@ -5,72 +5,75 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game
 {
-    public static readonly World EcsWorld = new();
+    private readonly World EcsWorld = new();
 
     public EntitySpawner CreateEntity() => EcsWorld.Entity();
 
     private void UpdateSystems()
     {
-        UpdateSystem<SystemTypes.FrameUpdate>();
+        UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.For>();
+        UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Job>();
     }
 
-    private void UpdateSystem<TSystemType>() where TSystemType : SystemType
+    private void UpdateSystem<TSystemType, TStreamType>()
+        where TSystemType : SystemType
+        where TStreamType : StreamType
     {
-        var stream = EcsWorld
-            .Query<SystemHolder>()
+        var stream = QueryEntities<SystemHolder>()
             .Has<TSystemType>()
+            .Has<TStreamType>()
             .Stream();
-
-        stream.For((ref SystemHolder holder) => holder.system.UpdateSystem());
+        
+        stream.For(static (ref SystemHolder holder) => holder.system.UpdateSystem<TStreamType>());
     }
 
-    private void SpawnSystemEntity<TSystemType>(ISystem system) where TSystemType : SystemType, new()
+    private void SpawnSystemEntity<TSystemType, TStreamType>(ISystem system)
+        where TSystemType : SystemType, new()
+        where TStreamType : StreamType, new()
     {
         CreateEntity()
             .Add<TSystemType>()
+            .Add<TStreamType>()
             .Add(new SystemHolder(system))
-            .Spawn().Dispose();
+            .Spawn()
+            .Dispose();
     }
 
-    public void SpawnSystem<TSystem, TType1, TSystemType>()
+    public void SpawnSystem<TSystem, TType1, TSystemType, TStreamType>()
         where TSystem : BaseSystem<TType1>, ISystem, new()
         where TType1 : notnull, new()
         where TSystemType : SystemType, new()
-    {
-        SpawnSystemEntity<TSystemType>(new TSystem());
-    }
+        where TStreamType : StreamType, new() =>
+        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem());
 
-    public void SpawnSystem<TSystem, TType1, TType2, TSystemType>()
+    public void SpawnSystem<TSystem, TType1, TType2, TSystemType, TStreamType>()
         where TSystem : BaseSystem<TType1, TType2>, ISystem, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TSystemType : SystemType, new()
-    {
-        SpawnSystemEntity<TSystemType>(new TSystem());
-    }
+        where TStreamType : StreamType, new() =>
+        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem());
 
-    public void SpawnSystem<TSystem, TType1, TType2, TType3, TSystemType>()
+    public void SpawnSystem<TSystem, TType1, TType2, TType3, TSystemType, TStreamType>()
         where TSystem : BaseSystem<TType1, TType2, TType3>, ISystem, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TType3 : notnull, new()
         where TSystemType : SystemType, new()
-    {
-        SpawnSystemEntity<TSystemType>(new TSystem());
-    }
+        where TStreamType : StreamType, new() =>
+        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem());
 
-    public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TSystemType>()
+    public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TSystemType, TStreamType>()
         where TSystem : BaseSystem<TType1, TType2, TType3, TType4>, ISystem, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TType3 : notnull, new()
         where TType4 : notnull, new()
         where TSystemType : SystemType, new()
-    {
-        SpawnSystemEntity<TSystemType>(new TSystem());
-    }
+        where TStreamType : StreamType, new() =>
+        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem());
 
-    public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TType5, TSystemType>()
+    public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TType5, TSystemType, TStreamType>()
         where TSystem : BaseSystem<TType1, TType2, TType3, TType4, TType5>, ISystem, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
@@ -78,7 +81,36 @@ public partial class Game
         where TType4 : notnull, new()
         where TType5 : notnull, new()
         where TSystemType : SystemType, new()
-    {
-        SpawnSystemEntity<TSystemType>(new TSystem());
-    }
+        where TStreamType : StreamType, new() =>
+        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem());
+
+    public QueryBuilder<C1> QueryEntities<C1>()
+        where C1 : notnull =>
+        EcsWorld.Query<C1>();
+
+    public QueryBuilder<C1, C2> QueryEntities<C1, C2>()
+        where C1 : notnull
+        where C2 : notnull =>
+        EcsWorld.Query<C1, C2>();
+
+    public QueryBuilder<C1, C2, C3> QueryEntities<C1, C2, C3>()
+        where C1 : notnull
+        where C2 : notnull
+        where C3 : notnull =>
+        EcsWorld.Query<C1, C2, C3>();
+
+    public QueryBuilder<C1, C2, C3, C4> QueryEntities<C1, C2, C3, C4>()
+        where C1 : notnull
+        where C2 : notnull
+        where C3 : notnull
+        where C4 : notnull =>
+        EcsWorld.Query<C1, C2, C3, C4>();
+
+    public QueryBuilder<C1, C2, C3, C4, C5> QueryEntities<C1, C2, C3, C4, C5>()
+        where C1 : notnull
+        where C2 : notnull
+        where C3 : notnull
+        where C4 : notnull
+        where C5 : notnull =>
+        EcsWorld.Query<C1, C2, C3, C4, C5>();
 }

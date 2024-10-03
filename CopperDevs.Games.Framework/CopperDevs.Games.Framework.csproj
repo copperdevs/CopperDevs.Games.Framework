@@ -16,4 +16,16 @@
       <PackageReference Include="Raylib-CSharp" Version="4.1.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Game.Components.cs">
+        <DependentUpon>Game.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Game.Rendering.cs">
+        <DependentUpon>Game.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Game.Systems.cs">
+        <DependentUpon>Game.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

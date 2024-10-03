@@ -1,27 +1,25 @@
 ﻿namespace CopperDevs.Games.Framework.ECS;
 
-public abstract class BaseSystem<T1, T2>(SystemStreamType streamType) : ISystem
+public abstract class BaseSystem<T1, T2> : ISystem
     where T1 : notnull, new()
     where T2 : notnull, new()
 {
     public abstract void Update(ref T1 componentOne, ref T2 componentTwo);
 
-    void ISystem.UpdateSystem()
+    void ISystem.UpdateSystem<TStreamType>()
     {
-        var stream = Game.EcsWorld.Query<T1, T2>().Stream();
+        var stream = Game.Instance.QueryEntities<T1, T2>().Stream();
 
-        switch (streamType)
+        if (typeof(TStreamType) == typeof(StreamTypes.For))
         {
-            case SystemStreamType.For:
-                stream.For((ref T1 componentOne, ref T2 componentTwo) =>
-                    Update(ref componentOne, ref componentTwo));
-                break;
-            case SystemStreamType.Job:
-                stream.Job((ref T1 componentOne, ref T2 componentTwo) =>
-                    Update(ref componentOne, ref componentTwo));
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(streamType), streamType, null);
+            stream.For((ref T1 componentOne, ref T2 componentTwo) =>
+                Update(ref componentOne, ref componentTwo));
+        }
+
+        else if (typeof(TStreamType) == typeof(StreamTypes.Job))
+        {
+            stream.Job((ref T1 componentOne, ref T2 componentTwo) =>
+                Update(ref componentOne, ref componentTwo));
         }
     }
 }

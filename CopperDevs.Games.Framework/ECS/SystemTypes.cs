@@ -1,11 +1,19 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using fennecs;
 
 namespace CopperDevs.Games.Framework.ECS;
 
 public record SystemType;
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+public record StreamType;
+
 public sealed class SystemTypes
 {
     public sealed record FrameUpdate : SystemType;
+}
+
+public sealed class StreamTypes
+{
+    public sealed record For : StreamType;
+    public sealed record Job : StreamType;
 }

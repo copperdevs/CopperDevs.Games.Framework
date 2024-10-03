@@ -4,7 +4,7 @@ using Raylib_CSharp.Windowing;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
-public class BunnyMover() : BaseSystem<Bunny>(SystemStreamType.Job)
+public class BunnyMover : BaseSystem<Bunny>
 {
     public override void Update(ref Bunny bunny)
     {
