@@ -1,7 +1,11 @@
 ﻿using System.Numerics;
+using System.Reflection;
 using CopperDevs.Core.Data;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS;
+using CopperDevs.Games.Framework.Utility;
+using CopperDevs.Logger;
+using fennecs;
 using Raylib_CSharp.Windowing;
 
 namespace CopperDevs.Games.Framework.Testing;
@@ -43,8 +47,14 @@ public static class Program
         game.SpawnSystem<MouseMover, Vector2, Enemy, SystemTypes.FrameUpdate, StreamTypes.Job>();
 
         game.SpawnSystem<Vector2Renderer, Vector2, SystemTypes.FrameUpdate, StreamTypes.For>();
-        
+
         game.AddComponent<EnemySpawner, StreamTypes.Job>();
+
+        var count = Game.Instance.QueryEntities<Vector2>()
+            .Has(typeof(Enemy))
+            .Stream().Count;
+        
+        Log.Debug(count);
     }
 }
 
