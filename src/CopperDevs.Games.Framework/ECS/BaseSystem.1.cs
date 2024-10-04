@@ -7,7 +7,7 @@ public abstract class BaseSystem<T1> : ISystem
 {
     public abstract void Update(ref T1 component);
 
-    void ISystem.UpdateSystem<TStreamType>()
+    void ISystem.UpdateSystem<TStreamType>(List<IFilter> filters)
     {
         var stream = Game.Instance.QueryEntities<T1>().Stream();
 
