@@ -19,6 +19,7 @@ public partial class Game
     {
         UpdateComponents<StreamTypes.For>();
         UpdateComponents<StreamTypes.Job>();
+        UpdateComponents<StreamTypes.Raw>();
     }
 
     private void UpdateComponents<TStreamType>() where TStreamType : StreamType, new()
@@ -31,6 +32,12 @@ public partial class Game
             stream.For(static (ref ComponentHolder holder) => holder.Update());
 
         else if (typeof(TStreamType) == typeof(StreamTypes.Job))
-            stream.For(static (ref ComponentHolder holder) => holder.Update());
+            stream.Job(static (ref ComponentHolder holder) => holder.Update());
+
+        else if (typeof(TStreamType) == typeof(StreamTypes.Raw))
+            stream.Raw(static holders =>
+            {
+                foreach (var holder in holders.Span) holder.Update();
+            });
     }
 }

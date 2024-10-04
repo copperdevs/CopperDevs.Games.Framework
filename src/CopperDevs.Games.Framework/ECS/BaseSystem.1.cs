@@ -1,6 +1,4 @@
-﻿using CopperDevs.Logger;
-
-namespace CopperDevs.Games.Framework.ECS;
+﻿namespace CopperDevs.Games.Framework.ECS;
 
 public abstract class BaseSystem<T1> : ISystem
     where T1 : notnull, new()
@@ -22,5 +20,8 @@ public abstract class BaseSystem<T1> : ISystem
             stream.Job((ref T1 component) =>
                 Update(ref component));
         }
+
+        else if (typeof(TStreamType) == typeof(StreamTypes.Raw))
+            throw new NotImplementedException();
     }
 }

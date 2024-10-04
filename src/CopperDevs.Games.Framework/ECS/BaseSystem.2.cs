@@ -21,5 +21,8 @@ public abstract class BaseSystem<T1, T2> : ISystem
             stream.Job((ref T1 componentOne, ref T2 componentTwo) =>
                 Update(ref componentOne, ref componentTwo));
         }
+        
+        else if (typeof(TStreamType) == typeof(StreamTypes.Raw))
+            throw new NotImplementedException();
     }
 }
