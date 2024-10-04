@@ -22,6 +22,12 @@ public abstract class BaseSystem<T1> : ISystem
         }
 
         else if (typeof(TStreamType) == typeof(StreamTypes.Raw))
-            throw new NotImplementedException();
+        {
+            stream.Raw(components =>
+            {
+                foreach (ref var component in components.Span) 
+                    Update(ref component);
+            });
+        }
     }
 }
