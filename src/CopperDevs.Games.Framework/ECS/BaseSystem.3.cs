@@ -7,9 +7,9 @@ public abstract class BaseSystem<T1, T2, T3> : ISystem
 {
     public abstract void Update(ref T1 componentOne, ref T2 componentTwo, ref T3 componentThree);
 
-    void ISystem.UpdateSystem<TStreamType>(List<IFilter> filters)
+    void ISystem.UpdateSystem<TStreamType>(IFilter[] filters)
     {
-        var stream = Game.Instance.QueryEntities<T1, T2, T3>().Stream();
+        var stream = Game.Instance.QueryEntities<T1, T2, T3>(filters).Stream();
 
         if (typeof(TStreamType) == typeof(StreamTypes.For))
         {

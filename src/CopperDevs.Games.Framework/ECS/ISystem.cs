@@ -2,5 +2,5 @@
 
 public interface ISystem
 {
-    protected internal void UpdateSystem<TStreamType>(List<IFilter> filters) where TStreamType : StreamType;
+    protected internal void UpdateSystem<TStreamType>(IFilter[] filters) where TStreamType : StreamType;
 }

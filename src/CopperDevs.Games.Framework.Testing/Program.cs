@@ -44,7 +44,7 @@ public static class Program
 
         // game.SpawnSystem<RandomMover, Vector2, SystemTypes.FrameUpdate, StreamTypes.Job>();
 
-        game.SpawnSystem<MouseMover, Vector2, Enemy, SystemTypes.FrameUpdate, StreamTypes.Job>();
+        game.SpawnSystem<MouseMover, Vector2, SystemTypes.FrameUpdate, StreamTypes.Job>(new HasFilter<Enemy>());
 
         game.SpawnSystem<Vector2Renderer, Vector2, SystemTypes.FrameUpdate, StreamTypes.For>();
 
@@ -53,7 +53,7 @@ public static class Program
         var count = Game.Instance.QueryEntities<Vector2>()
             .Has(typeof(Enemy))
             .Stream().Count;
-        
+
         Log.Debug(count);
     }
 }

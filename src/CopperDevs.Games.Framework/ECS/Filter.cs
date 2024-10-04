@@ -1,9 +1,32 @@
-﻿namespace CopperDevs.Games.Framework.ECS;
+﻿using CopperDevs.Games.Framework.Utility;
 
-public class Filter<TTargetType, TFilterType> : IFilter
+namespace CopperDevs.Games.Framework.ECS;
+
+public record struct HasFilter<TTargetType> : IFilter
     where TTargetType : notnull, new()
-    where TFilterType : FilterType
 {
+    public TQueryBuilder FilterQuery<TQueryBuilder>(TQueryBuilder queryBuilder)
+        where TQueryBuilder : class
+        => queryBuilder.Has(typeof(TTargetType));
 }
 
-public interface IFilter;
+public record struct NotFilter<TTargetType> : IFilter
+    where TTargetType : notnull, new()
+{
+    public TQueryBuilder FilterQuery<TQueryBuilder>(TQueryBuilder queryBuilder)
+        where TQueryBuilder : class
+        => queryBuilder.Not(typeof(TTargetType));
+}
+
+public record struct AnyFilter<TTargetType> : IFilter
+    where TTargetType : notnull, new()
+{
+    public TQueryBuilder FilterQuery<TQueryBuilder>(TQueryBuilder queryBuilder)
+        where TQueryBuilder : class
+        => queryBuilder.Any(typeof(TTargetType));
+}
+
+public interface IFilter
+{
+    public TQueryBuilder FilterQuery<TQueryBuilder>(TQueryBuilder queryBuilder) where TQueryBuilder : class;
+}

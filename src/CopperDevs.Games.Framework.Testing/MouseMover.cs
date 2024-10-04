@@ -8,9 +8,9 @@ using Random = CopperDevs.Core.Utility.Random;
 
 namespace CopperDevs.Games.Framework.Testing;
 
-public class MouseMover : BaseSystem<Vector2, Enemy>
+public class MouseMover : BaseSystem<Vector2>
 {
-    public override void Update(ref Vector2 component, ref Enemy enemy)
+    public override void Update(ref Vector2 component)
     {
         component += (LookAt(component, Input.GetMousePosition()).ToRotatedUnitVector() * (Vector2.Distance(component, Input.GetMousePosition()) > 64 ? 1 : -1)) * Time.GetFrameTime() * 32;
     }
