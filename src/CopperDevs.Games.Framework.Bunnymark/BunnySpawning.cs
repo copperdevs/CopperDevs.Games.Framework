@@ -9,14 +9,21 @@ public class BunnySpawning : Component
     {
         if (Input.IsMouseButtonDown(MouseButton.Left))
         {
-            for (var i = 0; i < 100; i++)
-            {
-                var bunny = new Bunny();
+            // spawn bunnies
+            Game.Instance.CreateEntity()
+                .Add<Bunny>()
+                .Add<NewBunny>()
+                .Spawn(100)
+                .Dispose();
 
-                bunny.SetDefaultValues(Input.GetMousePosition());
+            // get all new bunnies
+            var query = Game.Instance.QueryEntities<Bunny>().Has<NewBunny>();
 
-                Game.Instance.CreateEntity().Add(bunny).Spawn().Dispose();
-            }
+            // set default values with mouse position
+            query.Stream().Job(static (ref Bunny bunny) => bunny.SetDefaultValues(Input.GetMousePosition()));
+
+            // remove new bunny component from all created bunnies
+            query.Compile().Remove<NewBunny>();
         }
     }
 }

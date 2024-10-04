@@ -5,6 +5,8 @@ using Raylib_CSharp.Windowing;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
+public record struct NewBunny;
+
 public struct Bunny
 {
     public Vector2 Position;
@@ -13,6 +15,9 @@ public struct Bunny
 
     public Color Color;
 
+    
+    // default values are set here instead of in a constructor so when
+    // they are mass spawned none of them have the exact same values
     public void SetDefaultValues()
     {
         Raylib.SetRandomSeed((uint)(Random.Shared.Next(int.MinValue, int.MaxValue) - int.MinValue));

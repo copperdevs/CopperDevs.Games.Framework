@@ -30,16 +30,20 @@ public static class Program
 
     private static void OnGameStart()
     {
+        // loads bunny texture from the embedded resources
         BunnyTexture = typeof(Bunny).Assembly.LoadTexture("CopperDevs.Games.Framework.Bunnymark.Resources.wabbit_alpha.png");
 
+        // creates 100 initial bunnies
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
+        // sets random default values for the initial bunnies
         game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
 
+        // adds a system for moving each bunny, and a system to render all bunnies
         game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate, StreamTypes.Job>();
         game.SpawnSystem<BunnyRenderer, Bunny, SystemTypes.FrameUpdate, StreamTypes.For>();
 
-        game.AddComponent<UiRendering, StreamTypes.For>();
-        game.AddComponent<BunnySpawning, StreamTypes.Job>();
+        game.AddComponent<UiRendering, StreamTypes.For>(); // simple ui to show how many bunnies, the games fps, and the batched draw calls 
+        game.AddComponent<BunnySpawning, StreamTypes.Job>(); // spawn more bunnies on held left click
     }
 }
