@@ -1,4 +1,5 @@
-﻿using CopperDevs.Games.Framework.Rendering;
+﻿using CopperDevs.Games.Framework.ECS;
+using CopperDevs.Games.Framework.Rendering;
 using CopperDevs.Games.Framework.Rendering.DearImGui;
 using Raylib_CSharp;
 using Raylib_CSharp.Rendering;
@@ -7,20 +8,23 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game
 {
-    private EngineWindow Window = null!;
-    private readonly GameRenderer GameRenderer;
-    private ImGuiRendering ImGuiRendering = null!;
+    private EngineWindow window = null!;
+    private readonly GameRenderer gameRenderer;
+    private ImGuiRendering imGuiRendering = null!;
 
     public void Run()
     {
-        using (Window = new EngineWindow(settings))
+        using (window = new EngineWindow(settings))
         {
             OnGameStart?.Invoke();
-            ImGuiRendering = new ImGuiRendering();
+            
+            QueryEntities<ComponentHolder>().Stream().Job(static (ref ComponentHolder holder) => holder.Start());
+            
+            imGuiRendering = new ImGuiRendering();
 
-            while (!Window.ShouldClose)
+            while (!window.ShouldClose)
             {
-                GameRenderer.RenderFrame();
+                gameRenderer.RenderFrame();
             }
         }
     }
@@ -32,6 +36,6 @@ public partial class Game
 
     private void UiRendering()
     {
-        ImGuiRendering?.Render();
+        imGuiRendering?.Render();
     }
 }

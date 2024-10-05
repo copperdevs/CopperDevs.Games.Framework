@@ -5,9 +5,9 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game
 {
-    private readonly World EcsWorld = new();
+    private readonly World ecsWorld = new();
 
-    public EntitySpawner CreateEntity() => EcsWorld.Entity();
+    public EntitySpawner CreateEntity() => ecsWorld.Entity();
 
     private void UpdateSystems()
     {
@@ -25,7 +25,7 @@ public partial class Game
             .Has<TStreamType>()
             .Stream();
 
-        stream.For(static (ref SystemHolder holder) => { holder.system.UpdateSystem<TStreamType>(holder.filters); });
+        stream.For(static (ref SystemHolder holder) => { holder.System.UpdateSystem<TStreamType>(holder.Filters); });
     }
 
     private void SpawnSystemEntity<TSystemType, TStreamType>(ISystem system, IFilter[] filters)
@@ -87,25 +87,25 @@ public partial class Game
 
     public QueryBuilder<C1> QueryEntities<C1>()
         where C1 : notnull =>
-        EcsWorld.Query<C1>();
+        ecsWorld.Query<C1>();
 
     public QueryBuilder<C1, C2> QueryEntities<C1, C2>()
         where C1 : notnull
         where C2 : notnull =>
-        EcsWorld.Query<C1, C2>();
+        ecsWorld.Query<C1, C2>();
 
     public QueryBuilder<C1, C2, C3> QueryEntities<C1, C2, C3>()
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull =>
-        EcsWorld.Query<C1, C2, C3>();
+        ecsWorld.Query<C1, C2, C3>();
 
     public QueryBuilder<C1, C2, C3, C4> QueryEntities<C1, C2, C3, C4>()
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull
         where C4 : notnull =>
-        EcsWorld.Query<C1, C2, C3, C4>();
+        ecsWorld.Query<C1, C2, C3, C4>();
 
     public QueryBuilder<C1, C2, C3, C4, C5> QueryEntities<C1, C2, C3, C4, C5>()
         where C1 : notnull
@@ -113,7 +113,7 @@ public partial class Game
         where C3 : notnull
         where C4 : notnull
         where C5 : notnull =>
-        EcsWorld.Query<C1, C2, C3, C4, C5>();
+        ecsWorld.Query<C1, C2, C3, C4, C5>();
 
     public QueryBuilder<C1> QueryEntities<C1>(params IFilter[] filters)
         where C1 : notnull =>
@@ -122,20 +122,20 @@ public partial class Game
     public QueryBuilder<C1, C2> QueryEntities<C1, C2>(params IFilter[] filters)
         where C1 : notnull
         where C2 : notnull =>
-        filters.Aggregate(EcsWorld.Query<C1, C2>(), (current, filter) => filter.FilterQuery(current));
+        filters.Aggregate(ecsWorld.Query<C1, C2>(), (current, filter) => filter.FilterQuery(current));
 
     public QueryBuilder<C1, C2, C3> QueryEntities<C1, C2, C3>(params IFilter[] filters)
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull =>
-        filters.Aggregate(EcsWorld.Query<C1, C2, C3>(), (current, filter) => filter.FilterQuery(current));
+        filters.Aggregate(ecsWorld.Query<C1, C2, C3>(), (current, filter) => filter.FilterQuery(current));
 
     public QueryBuilder<C1, C2, C3, C4> QueryEntities<C1, C2, C3, C4>(params IFilter[] filters)
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull
         where C4 : notnull =>
-        filters.Aggregate(EcsWorld.Query<C1, C2, C3, C4>(), (current, filter) => filter.FilterQuery(current));
+        filters.Aggregate(ecsWorld.Query<C1, C2, C3, C4>(), (current, filter) => filter.FilterQuery(current));
 
     public QueryBuilder<C1, C2, C3, C4, C5> QueryEntities<C1, C2, C3, C4, C5>(params IFilter[] filters)
         where C1 : notnull
@@ -143,5 +143,5 @@ public partial class Game
         where C3 : notnull
         where C4 : notnull
         where C5 : notnull =>
-        filters.Aggregate(EcsWorld.Query<C1, C2, C3, C4, C5>(), (current, filter) => filter.FilterQuery(current));
+        filters.Aggregate(ecsWorld.Query<C1, C2, C3, C4, C5>(), (current, filter) => filter.FilterQuery(current));
 }

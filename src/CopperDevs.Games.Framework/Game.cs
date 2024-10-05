@@ -26,20 +26,20 @@ public partial class Game : Scope
 
         this.settings = settings;
 
-        GameRenderer = new GameRenderer();
-        GameRenderer.OnRender += UpdateSystems;
-        GameRenderer.OnRender += BaseRendering;
-        GameRenderer.OnUiRender += UiRendering;
-        GameRenderer.OnRender += () => OnRender?.Invoke();
-        GameRenderer.OnUiRender += () => OnUiRender?.Invoke();
-        GameRenderer.OnRender += UpdateComponents;
+        gameRenderer = new GameRenderer();
+        gameRenderer.OnRender += UpdateSystems;
+        gameRenderer.OnRender += BaseRendering;
+        gameRenderer.OnUiRender += UiRendering;
+        gameRenderer.OnRender += () => OnRender?.Invoke();
+        gameRenderer.OnUiRender += () => OnUiRender?.Invoke();
+        gameRenderer.OnRender += UpdateComponents;
     }
 
     protected override void CloseScope()
     {
         QueryEntities<ComponentHolder>().Stream().Job(static (ref ComponentHolder holder) => holder.Stop());
-        
-        EcsWorld.Dispose();
-        ImGuiRendering.Dispose();
+
+        ecsWorld.Dispose();
+        imGuiRendering.Dispose();
     }
 }
