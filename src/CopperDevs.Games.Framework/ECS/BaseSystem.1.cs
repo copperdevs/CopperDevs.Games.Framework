@@ -20,14 +20,5 @@ public abstract class BaseSystem<T1> : ISystem
             stream.Job((ref T1 component) =>
                 Update(ref component));
         }
-
-        else if (typeof(TStreamType) == typeof(StreamTypes.Raw))
-        {
-            stream.Raw(components =>
-            {
-                foreach (ref var component in components.Span) 
-                    Update(ref component);
-            });
-        }
     }
 }

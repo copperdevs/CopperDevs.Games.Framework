@@ -14,7 +14,6 @@ public partial class Game
     {
         UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.For>();
         UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Job>();
-        UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Raw>();
     }
 
     private void UpdateSystem<TSystemType, TStreamType>()

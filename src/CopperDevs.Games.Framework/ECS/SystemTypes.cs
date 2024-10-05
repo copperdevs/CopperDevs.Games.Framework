@@ -14,6 +14,4 @@ public sealed class StreamTypes
     public sealed record For : StreamType;
 
     public sealed record Job : StreamType;
-
-    public sealed record Raw : StreamType;
 }
