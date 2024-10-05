@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS;
 using fennecs;
 
@@ -10,10 +11,23 @@ public partial class Game
 
     public EntitySpawner CreateEntity() => ecsWorld.Entity();
 
+    private const float FixedUpdateTime = 1f / 60f;
+    private float fixedUpdateTimer;
+
     private void UpdateSystems()
     {
         UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.For>();
         UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Job>();
+
+        fixedUpdateTimer += Time.DeltaTime;
+
+        if (!(fixedUpdateTimer >= FixedUpdateTime)) 
+            return;
+        
+        fixedUpdateTimer = 0;
+
+        UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.For>();
+        UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.Job>();
     }
 
     private void UpdateSystem<TSystemType, TStreamType>()

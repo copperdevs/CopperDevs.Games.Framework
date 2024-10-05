@@ -11,7 +11,6 @@ public partial class Game : Scope
 {
     public static Game Instance = null!;
 
-    private Stopwatch stopwatch = null!;
     private readonly EngineSettings settings;
 
     public Action OnGameStart = null!;

@@ -1,8 +1,6 @@
 ﻿using CopperDevs.Games.Framework.ECS;
 using CopperDevs.Games.Framework.Rendering;
 using CopperDevs.Games.Framework.Rendering.DearImGui;
-using Raylib_CSharp;
-using Raylib_CSharp.Rendering;
 
 namespace CopperDevs.Games.Framework;
 

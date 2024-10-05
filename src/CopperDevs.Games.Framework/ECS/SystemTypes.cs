@@ -1,4 +1,5 @@
-﻿namespace CopperDevs.Games.Framework.ECS;
+﻿// ReSharper disable ClassNeverInstantiated.Global
+namespace CopperDevs.Games.Framework.ECS;
 
 public record SystemType;
 
@@ -7,6 +8,8 @@ public record StreamType;
 public sealed class SystemTypes
 {
     public sealed record FrameUpdate : SystemType;
+
+    public sealed record FixedUpdate : SystemType;
 }
 
 public sealed class StreamTypes
