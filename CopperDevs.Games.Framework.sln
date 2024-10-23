@@ -10,8 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.ECS", "lib
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repo", "Repo", "{7ACCC7BB-FB52-408D-9C4A-E74273E2D998}"
 	ProjectSection(SolutionItems) = preProject
-		repo\License.txt = repo\License.txt
-		repo\ReadMe.md = repo\ReadMe.md
+		License.txt = License.txt
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{85F92BE5-6A8F-467A-B08E-1404111EDC18}"
