@@ -6,7 +6,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Bunnymark", "src\CopperDevs.Games.Framework.Bunnymark\CopperDevs.Games.Framework.Bunnymark.csproj", "{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.ECS", "CopperDevs.Games.ECS\CopperDevs.Games.ECS.csproj", "{E0940DA9-C135-4EED-B839-86D40596CBD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.ECS", "lib\ecs\CopperDevs.Games.ECS\CopperDevs.Games.ECS.csproj", "{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repo", "Repo", "{7ACCC7BB-FB52-408D-9C4A-E74273E2D998}"
+	ProjectSection(SolutionItems) = preProject
+		repo\License.txt = repo\License.txt
+		repo\ReadMe.md = repo\ReadMe.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{85F92BE5-6A8F-467A-B08E-1404111EDC18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{EBA4A2F2-6ADB-4A2F-9EC1-3A3FB151D224}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +36,15 @@ Global
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D29CBC7F-43D6-40E1-ACC6-EB1315C2BF5F} = {85F92BE5-6A8F-467A-B08E-1404111EDC18}
+		{57CEC1B7-94D8-4550-81B9-4D75FA46F5F8} = {85F92BE5-6A8F-467A-B08E-1404111EDC18}
+		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF} = {EBA4A2F2-6ADB-4A2F-9EC1-3A3FB151D224}
+		{B0239E66-40AA-4FB9-871F-889C1308AE2F} = {EBA4A2F2-6ADB-4A2F-9EC1-3A3FB151D224}
 	EndGlobalSection
 EndGlobal

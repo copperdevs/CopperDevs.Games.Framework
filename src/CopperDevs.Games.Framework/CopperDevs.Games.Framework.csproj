@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\CopperDevs.Games.ECS\CopperDevs.Games.ECS.csproj" />
+      <ProjectReference Include="..\..\lib\ecs\CopperDevs.Games.ECS\CopperDevs.Games.ECS.csproj" />
     </ItemGroup>
 
 </Project>
