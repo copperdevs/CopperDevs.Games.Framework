@@ -50,7 +50,7 @@ public static class Program
         game.AddComponent<EnemySpawner, StreamTypes.Job>();
 
         var count = Game.Instance.QueryEntities<Vector2>()
-            .Has(typeof(Enemy))
+            .Has<Enemy>()
             .Stream().Count;
 
         Log.Debug(count);
