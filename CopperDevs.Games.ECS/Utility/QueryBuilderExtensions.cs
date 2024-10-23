@@ -1,6 +1,6 @@
 ﻿using fennecs;
 
-namespace CopperDevs.Games.Framework.Utility;
+namespace CopperDevs.Games.ECS.Utility;
 
 public static class QueryBuilderExtensions
 {

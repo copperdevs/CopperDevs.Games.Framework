@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using CopperDevs.Games.ECS;
+using CopperDevs.Games.ECS.Systems;
 using CopperDevs.Games.Framework.Data;
-using CopperDevs.Games.Framework.ECS;
 using fennecs;
 
 namespace CopperDevs.Games.Framework;
@@ -9,87 +10,63 @@ public partial class Game
 {
     private readonly World ecsWorld = new();
 
-    public EntitySpawner CreateEntity() => ecsWorld.Entity();
+    public EntitySpawner CreateEntity() => ecsWorld.CreateEntity();
 
     private const float FixedUpdateTime = 1f / 60f;
     private float fixedUpdateTimer;
 
     private void UpdateSystems()
     {
-        UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.For>();
-        UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Job>();
+        ecsWorld.UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.For>();
+        ecsWorld.UpdateSystem<SystemTypes.FrameUpdate, StreamTypes.Job>();
 
         fixedUpdateTimer += Time.DeltaTime;
 
-        if (!(fixedUpdateTimer >= FixedUpdateTime)) 
+        if (!(fixedUpdateTimer >= FixedUpdateTime))
             return;
-        
+
         fixedUpdateTimer = 0;
 
-        UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.For>();
-        UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.Job>();
-    }
-
-    private void UpdateSystem<TSystemType, TStreamType>()
-        where TSystemType : SystemType
-        where TStreamType : StreamType
-    {
-        var stream = QueryEntities<SystemHolder>()
-            .Has<TSystemType>()
-            .Has<TStreamType>()
-            .Stream();
-
-        stream.For(static (ref SystemHolder holder) => { holder.System.UpdateSystem<TStreamType>(holder.Filters); });
-    }
-
-    private void SpawnSystemEntity<TSystemType, TStreamType>(ISystem system, IFilter[] filters)
-        where TSystemType : SystemType, new()
-        where TStreamType : StreamType, new()
-    {
-        CreateEntity()
-            .Add<TSystemType>()
-            .Add<TStreamType>()
-            .Add(new SystemHolder(system, filters))
-            .Spawn()
-            .Dispose();
+        ecsWorld.UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.For>();
+        ecsWorld.UpdateSystem<SystemTypes.FixedUpdate, StreamTypes.Job>();
     }
 
     public void SpawnSystem<TSystem, TType1, TSystemType, TStreamType>(params IFilter[] filters)
-        where TSystem : BaseSystem<TType1>, ISystem, new()
+        where TSystem : BaseSystem<TType1>, new()
         where TType1 : notnull, new()
         where TSystemType : SystemType, new()
         where TStreamType : StreamType, new() =>
-        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem(), filters);
+        ecsWorld.SpawnSystem<TSystem, TType1, TSystemType, TStreamType>(filters);
 
     public void SpawnSystem<TSystem, TType1, TType2, TSystemType, TStreamType>(params IFilter[] filters)
-        where TSystem : BaseSystem<TType1, TType2>, ISystem, new()
+        where TSystem : BaseSystem<TType1, TType2>, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TSystemType : SystemType, new()
         where TStreamType : StreamType, new() =>
-        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem(), filters);
+        ecsWorld.SpawnSystem<TSystem, TType1, TType2, TSystemType, TStreamType>(filters);
 
     public void SpawnSystem<TSystem, TType1, TType2, TType3, TSystemType, TStreamType>(params IFilter[] filters)
-        where TSystem : BaseSystem<TType1, TType2, TType3>, ISystem, new()
+        where TSystem : BaseSystem<TType1, TType2, TType3>, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TType3 : notnull, new()
         where TSystemType : SystemType, new()
         where TStreamType : StreamType, new() =>
-        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem(), filters);
+        ecsWorld.SpawnSystem<TSystem, TType1, TType2, TType3, TSystemType, TStreamType>(filters);
 
     public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TSystemType, TStreamType>(params IFilter[] filters)
-        where TSystem : BaseSystem<TType1, TType2, TType3, TType4>, ISystem, new()
+        where TSystem : BaseSystem<TType1, TType2, TType3, TType4>, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TType3 : notnull, new()
         where TType4 : notnull, new()
         where TSystemType : SystemType, new()
         where TStreamType : StreamType, new() =>
-        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem(), filters);
+        ecsWorld.SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TSystemType, TStreamType>(filters);
 
     public void SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TType5, TSystemType, TStreamType>(params IFilter[] filters)
-        where TSystem : BaseSystem<TType1, TType2, TType3, TType4, TType5>, ISystem, new()
+        where TSystem : BaseSystem<TType1, TType2, TType3, TType4, TType5>, new()
         where TType1 : notnull, new()
         where TType2 : notnull, new()
         where TType3 : notnull, new()
@@ -97,25 +74,25 @@ public partial class Game
         where TType5 : notnull, new()
         where TSystemType : SystemType, new()
         where TStreamType : StreamType, new() =>
-        SpawnSystemEntity<TSystemType, TStreamType>(new TSystem(), filters);
+        ecsWorld.SpawnSystem<TSystem, TType1, TType2, TType3, TType4, TType5, TSystemType, TStreamType>(filters);
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1> QueryEntities<C1>()
         where C1 : notnull =>
-        ecsWorld.Query<C1>();
+        ecsWorld.QueryEntities<C1>();
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2> QueryEntities<C1, C2>()
         where C1 : notnull
         where C2 : notnull =>
-        ecsWorld.Query<C1, C2>();
+        ecsWorld.QueryEntities<C1, C2>();
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3> QueryEntities<C1, C2, C3>()
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull =>
-        ecsWorld.Query<C1, C2, C3>();
+        ecsWorld.QueryEntities<C1, C2, C3>();
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3, C4> QueryEntities<C1, C2, C3, C4>()
@@ -123,7 +100,7 @@ public partial class Game
         where C2 : notnull
         where C3 : notnull
         where C4 : notnull =>
-        ecsWorld.Query<C1, C2, C3, C4>();
+        ecsWorld.QueryEntities<C1, C2, C3, C4>();
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3, C4, C5> QueryEntities<C1, C2, C3, C4, C5>()
@@ -132,7 +109,7 @@ public partial class Game
         where C3 : notnull
         where C4 : notnull
         where C5 : notnull =>
-        ecsWorld.Query<C1, C2, C3, C4, C5>();
+        ecsWorld.QueryEntities<C1, C2, C3, C4, C5>();
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1> QueryEntities<C1>(params IFilter[] filters)
@@ -143,14 +120,14 @@ public partial class Game
     public QueryBuilder<C1, C2> QueryEntities<C1, C2>(params IFilter[] filters)
         where C1 : notnull
         where C2 : notnull =>
-        filters.Aggregate(ecsWorld.Query<C1, C2>(), (current, filter) => filter.FilterQuery(current));
+        ecsWorld.QueryEntities<C1, C2>(filters);
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3> QueryEntities<C1, C2, C3>(params IFilter[] filters)
         where C1 : notnull
         where C2 : notnull
         where C3 : notnull =>
-        filters.Aggregate(ecsWorld.Query<C1, C2, C3>(), (current, filter) => filter.FilterQuery(current));
+        ecsWorld.QueryEntities<C1, C2, C3>(filters);
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3, C4> QueryEntities<C1, C2, C3, C4>(params IFilter[] filters)
@@ -158,7 +135,7 @@ public partial class Game
         where C2 : notnull
         where C3 : notnull
         where C4 : notnull =>
-        filters.Aggregate(ecsWorld.Query<C1, C2, C3, C4>(), (current, filter) => filter.FilterQuery(current));
+        ecsWorld.QueryEntities<C1, C2, C3, C4>(filters);
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public QueryBuilder<C1, C2, C3, C4, C5> QueryEntities<C1, C2, C3, C4, C5>(params IFilter[] filters)
@@ -167,5 +144,5 @@ public partial class Game
         where C3 : notnull
         where C4 : notnull
         where C5 : notnull =>
-        filters.Aggregate(ecsWorld.Query<C1, C2, C3, C4, C5>(), (current, filter) => filter.FilterQuery(current));
+        ecsWorld.QueryEntities<C1, C2, C3, C4, C5>(filters);
 }

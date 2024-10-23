@@ -1,6 +1,6 @@
-﻿using CopperDevs.Games.Framework.Utility;
+﻿using CopperDevs.Games.ECS.Utility;
 
-namespace CopperDevs.Games.Framework.ECS;
+namespace CopperDevs.Games.ECS;
 
 public record struct HasFilter<TTargetType> : IFilter
     where TTargetType : notnull, new()

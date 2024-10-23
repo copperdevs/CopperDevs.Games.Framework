@@ -1,4 +1,4 @@
-﻿using CopperDevs.Games.Framework.ECS;
+﻿using CopperDevs.Games.ECS.Systems;
 using Raylib_CSharp.Rendering;
 
 namespace CopperDevs.Games.Framework.Bunnymark;

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CopperDevs.Core.Utility;
+﻿using CopperDevs.Core.Utility;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.ECS;
 using CopperDevs.Games.Framework.Rendering;

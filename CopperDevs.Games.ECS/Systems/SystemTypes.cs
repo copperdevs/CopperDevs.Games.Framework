@@ -1,5 +1,5 @@
 ﻿// ReSharper disable ClassNeverInstantiated.Global
-namespace CopperDevs.Games.Framework.ECS;
+namespace CopperDevs.Games.ECS.Systems;
 
 public record SystemType;
 

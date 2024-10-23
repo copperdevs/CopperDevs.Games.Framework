@@ -1,11 +1,10 @@
 ﻿using System.Numerics;
-using System.Reflection;
 using CopperDevs.Core.Data;
+using CopperDevs.Games.ECS;
+using CopperDevs.Games.ECS.Systems;
+using CopperDevs.Games.ECS.Utility;
 using CopperDevs.Games.Framework.Data;
-using CopperDevs.Games.Framework.ECS;
-using CopperDevs.Games.Framework.Utility;
 using CopperDevs.Logger;
-using fennecs;
 using Raylib_CSharp.Windowing;
 
 namespace CopperDevs.Games.Framework.Testing;

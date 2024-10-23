@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.Framework.Bunnymark", "src\CopperDevs.Games.Framework.Bunnymark\CopperDevs.Games.Framework.Bunnymark.csproj", "{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopperDevs.Games.ECS", "CopperDevs.Games.ECS\CopperDevs.Games.ECS.csproj", "{E0940DA9-C135-4EED-B839-86D40596CBD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2F96C02-6C8C-49EC-8C0B-BEB8B062A8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0940DA9-C135-4EED-B839-86D40596CBD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

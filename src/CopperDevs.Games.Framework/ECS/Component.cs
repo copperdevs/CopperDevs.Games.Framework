@@ -1,6 +1,4 @@
-﻿using CopperDevs.Core.Utility;
-
-namespace CopperDevs.Games.Framework.ECS;
+﻿namespace CopperDevs.Games.Framework.ECS;
 
 public abstract class Component
 {

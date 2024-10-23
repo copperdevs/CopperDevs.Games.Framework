@@ -1,10 +1,8 @@
 ﻿using System.Numerics;
 using CopperDevs.Core.Utility;
-using CopperDevs.Games.Framework.ECS;
-using CopperDevs.Logger;
+using CopperDevs.Games.ECS.Systems;
 using Raylib_CSharp;
 using Raylib_CSharp.Interact;
-using Random = CopperDevs.Core.Utility.Random;
 
 namespace CopperDevs.Games.Framework.Testing;
 

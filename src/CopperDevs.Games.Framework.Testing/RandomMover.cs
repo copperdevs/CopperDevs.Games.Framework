@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 using CopperDevs.Core.Utility;
-using CopperDevs.Games.Framework.ECS;
+using CopperDevs.Games.ECS.Systems;
 using Raylib_CSharp;
 using Raylib_CSharp.Windowing;
 using Random = CopperDevs.Core.Utility.Random;
