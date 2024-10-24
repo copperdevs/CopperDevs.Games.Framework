@@ -6,14 +6,14 @@ riderModule.iml
 temp-notes.txt
 .idea
 CopperDevs.Games.Framework.sln.DotSettings.user
-
-# rider default crap
 /shelf/
 /workspace.xml
 /contentModel.xml
-/.idea.CopperDevs.DearImGui.iml
+/.idea.CopperDevs.Games.Framework.iml
 /modules.xml
 /projectSettingsUpdater.xml
 /httpRequests/
 /dataSources/
 /dataSources.local.xml
+.DS_Store
+imgui.ini
