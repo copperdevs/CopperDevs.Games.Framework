@@ -8,7 +8,7 @@ namespace CopperDevs.Games.Framework;
 
 public partial class Game
 {
-    private readonly World ecsWorld = new();
+    private World ecsWorld => scenes[currentActiveSceneType].world;
 
     public EntitySpawner CreateEntity() => ecsWorld.CreateEntity();
 

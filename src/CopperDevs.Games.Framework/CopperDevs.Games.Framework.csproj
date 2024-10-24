@@ -26,6 +26,9 @@
       <Compile Update="Game.Systems.cs">
         <DependentUpon>Game.cs</DependentUpon>
       </Compile>
+      <Compile Update="Game.Scenes.cs">
+        <DependentUpon>Game.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
