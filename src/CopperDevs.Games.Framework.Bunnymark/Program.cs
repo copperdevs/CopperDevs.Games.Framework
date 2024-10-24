@@ -45,5 +45,6 @@ public static class Program
 
         game.AddComponent<UiRendering, StreamTypes.For>(); // simple ui to show how many bunnies, the games fps, and the batched draw calls 
         game.AddComponent<BunnySpawning, StreamTypes.Job>(); // spawn more bunnies on held left click
+        game.AddComponent<BunnyDespawning, StreamTypes.Job>(); // despawn bunnies on right click
     }
 }
