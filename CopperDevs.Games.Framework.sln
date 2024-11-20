@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repo", "Repo", "{7ACCC7BB-F
 	ProjectSection(SolutionItems) = preProject
 		License.txt = License.txt
 		ReadMe.md = ReadMe.md
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{85F92BE5-6A8F-467A-B08E-1404111EDC18}"
