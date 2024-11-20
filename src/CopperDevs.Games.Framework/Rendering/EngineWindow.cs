@@ -1,25 +1,34 @@
 using CopperDevs.Core.Utility;
 using CopperDevs.Games.Framework.Data;
-using Raylib_CSharp;
-using Raylib_CSharp.Windowing;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Rendering;
 
 public class EngineWindow : Scope
 {
-    public bool ShouldClose => Window.ShouldClose();
-    public IntPtr Handle => Window.GetHandle();
+    public bool ShouldClose => Raylib.WindowShouldClose();
+
+    public IntPtr Handle
+    {
+        get
+        {
+            unsafe
+            {
+                return new IntPtr(Raylib.GetWindowHandle());
+            }
+        }
+    }
 
     public EngineWindow(EngineSettings settings)
     {
         Raylib.SetConfigFlags(settings.WindowFlags);
-        Window.Init(settings.WindowSize.X, settings.WindowSize.Y, settings.Title);
+        Raylib.InitWindow(settings.WindowSize.X, settings.WindowSize.Y, settings.Title);
         DwmCustomization();
     }
 
     protected override void CloseScope()
     {
-        Window.Close();
+        Raylib.CloseWindow();
     }
 
     private void DwmCustomization()

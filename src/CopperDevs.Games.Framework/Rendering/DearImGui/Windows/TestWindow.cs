@@ -1,5 +1,4 @@
 ﻿using CopperDevs.DearImGui;
-using CopperDevs.DearImGui.Attributes;
 using CopperDevs.DearImGui.Rendering;
 
 namespace CopperDevs.Games.Framework.Rendering.DearImGui.Windows;

@@ -1,6 +1,7 @@
-﻿using CopperDevs.Logger;
-using Raylib_CSharp.Logging;
-using rlLogger = Raylib_CSharp.Logging.Logger;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using CopperDevs.Logger;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Utility;
 
@@ -10,82 +11,85 @@ public static class RaylibLogger
 
     public static void Initialize()
     {
-        rlLogger.Init();
-        rlLogger.Message += RayLibLog;
-        rlLogger.SetTraceLogLevel(TraceLogLevel.All);
+        unsafe
+        {
+            Raylib.SetTraceLogCallback(&RayLibLog);
+            Raylib.SetTraceLogLevel(TraceLogLevel.All);
+        }
     }
-
-    private static bool RayLibLog(TraceLogLevel level, string message)
+    
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
+    private static unsafe void RayLibLog(TraceLogLevel logLevel, sbyte* rawText, IntPtr args)
     {
         if (HideLogs)
-            return true;
+            return;
+        
+        var text = Marshal.PtrToStringUTF8((IntPtr) rawText) ?? string.Empty;;
 
-        switch (level)
+        switch (logLevel)
         {
             case TraceLogLevel.All:
-                RaylibLogInfo(message);
+                RaylibLogInfo(text);
                 break;
             case TraceLogLevel.Trace:
-                RaylibLogTrace(message);
+                RaylibLogTrace(text);
                 break;
             case TraceLogLevel.Debug:
-                RaylibLogDebug(message);
+                RaylibLogDebug(text);
                 break;
             case TraceLogLevel.Info:
-                RaylibLogInfo(message);
+                RaylibLogInfo(text);
                 break;
             case TraceLogLevel.Warning:
-                RaylibLogWarning(message);
+                RaylibLogWarning(text);
                 break;
             case TraceLogLevel.Error:
-                RaylibLogError(message);
+                RaylibLogError(text);
                 break;
             case TraceLogLevel.Fatal:
-                RaylibLogFatal(message);
+                RaylibLogFatal(text);
                 break;
             case TraceLogLevel.None:
-                RaylibLogDebug(message);
+                RaylibLogDebug(text);
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(level), level, null);
+                throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null);
         }
-
-        return true;
     }
 
     private static void RaylibLogInfo(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.Cyan);
-        Log.Info($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Info($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 
     private static void RaylibLogTrace(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.LightBlue);
-        Log.Trace($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Trace($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 
     private static void RaylibLogDebug(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.Gray);
-        Log.Debug($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Debug($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 
     private static void RaylibLogWarning(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.BrightYellow);
-        Log.Warning($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Warning($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 
     private static void RaylibLogError(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.Red);
-        Log.Error($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Error($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 
     private static void RaylibLogFatal(object message)
     {
         var color = AnsiColors.GetColor(AnsiColors.Names.DarkRed);
-        Log.Fatal($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}");
+        Log.Fatal($"{AnsiColors.Black}{AnsiColors.WhiteBackground} Raylib {AnsiColors.Reset}{color} {message}{AnsiColors.Black}");
     }
 }

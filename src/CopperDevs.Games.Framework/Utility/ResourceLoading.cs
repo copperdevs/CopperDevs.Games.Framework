@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
-using Raylib_CSharp.Images;
-using Raylib_CSharp.Textures;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Utility;
 
@@ -19,16 +18,16 @@ public static class ResourceLoading
 
     public static Image LoadImage(Assembly targetAssembly, string fullPath)
     {
-        return Image.LoadFromMemory(Path.GetExtension(fullPath), LoadAsset(targetAssembly, fullPath));
+        return Raylib.LoadImageFromMemory(Path.GetExtension(fullPath), LoadAsset(targetAssembly, fullPath));
     }
 
     public static Texture2D LoadTexture(Assembly targetAssembly, string fullPath)
     {
         var loadedImage = LoadImage(targetAssembly, fullPath);
 
-        var loadedTexture = Texture2D.LoadFromImage(loadedImage);
+        var loadedTexture = Raylib.LoadTextureFromImage(loadedImage);
 
-        loadedImage.Unload();
+        Raylib.UnloadImage(loadedImage);
 
         return loadedTexture;
     }

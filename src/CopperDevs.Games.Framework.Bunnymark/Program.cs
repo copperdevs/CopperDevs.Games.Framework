@@ -2,8 +2,7 @@
 using CopperDevs.Games.ECS.Systems;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.Utility;
-using Raylib_CSharp.Textures;
-using Raylib_CSharp.Windowing;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
@@ -17,7 +16,7 @@ public static class Program
         var settings = new EngineSettings
         {
             WindowSize = new Vector2Int(800, 450),
-            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.AlwaysRunWindow | ConfigFlags.VSyncHint | ConfigFlags.ResizableWindow
+            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.WindowAlwaysRun | ConfigFlags.VSyncHint | ConfigFlags.WindowResizable
         };
 
         game = new Game(settings);

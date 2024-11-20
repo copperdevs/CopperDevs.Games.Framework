@@ -2,23 +2,21 @@
 using CopperDevs.Core.Data;
 using CopperDevs.Games.ECS;
 using CopperDevs.Games.ECS.Systems;
-using CopperDevs.Games.ECS.Utility;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Logger;
-using Raylib_CSharp.Windowing;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Testing;
 
 public static class Program
 {
     private static Game game = null!;
-
     public static void Main()
     {
         var settings = new EngineSettings
         {
             WindowSize = new Vector2Int(800, 450),
-            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.AlwaysRunWindow | ConfigFlags.VSyncHint | ConfigFlags.ResizableWindow
+            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.WindowAlwaysRun | ConfigFlags.VSyncHint | ConfigFlags.WindowResizable
         };
 
         game = new Game(settings);

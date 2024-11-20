@@ -1,5 +1,6 @@
-using Raylib_CSharp.Colors;
-using Raylib_CSharp.Rendering;
+
+
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Rendering;
 
@@ -10,12 +11,12 @@ public class GameRenderer
     
     public void RenderFrame()
     {
-        Graphics.ClearBackground(Color.RayWhite);
-        Graphics.BeginDrawing();
+        Raylib.ClearBackground(Color.RayWhite);
+        Raylib.BeginDrawing();
 
         OnRender?.Invoke();
         OnUiRender?.Invoke();
 
-        Graphics.EndDrawing();
+        Raylib.EndDrawing();
     }
 }
