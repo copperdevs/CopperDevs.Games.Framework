@@ -6,7 +6,7 @@ namespace CopperDevs.Games.Framework.Bunnymark;
 public class UiRendering : Component
 {
     public const int DefaultBatchBufferElements = 8192;
-    
+
     protected override void Update()
     {
         var count = Game.Instance.QueryEntities<Bunny>().Stream().Count;

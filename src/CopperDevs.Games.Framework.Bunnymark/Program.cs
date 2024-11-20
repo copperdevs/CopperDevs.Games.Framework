@@ -36,7 +36,7 @@ public static class Program
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
         // sets random default values for the initial bunnies
-        game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
+        game.Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
 
         // adds a system for moving each bunny, and a system to render all bunnies
         game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate, StreamTypes.Job>();

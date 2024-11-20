@@ -10,9 +10,9 @@ public class BunnySpawning : Component
 
     protected override void Update()
     {
-        if (!Raylib.IsMouseButtonDown(MouseButton.Left)) 
+        if (!Raylib.IsMouseButtonDown(MouseButton.Left))
             return;
-        
+
         // spawn bunnies
         Game.Instance.CreateEntity()
             .Add<Bunny>()

@@ -13,7 +13,7 @@ public struct Bunny
 
     public Color Color;
 
-    
+
     // default values are set here instead of in a constructor so when
     // they are mass spawned none of them have the exact same values
     public void SetDefaultValues()

@@ -1,4 +1,5 @@
-﻿using CopperDevs.Games.Framework.ECS;
+﻿using CopperDevs.Games.ECS;
+using CopperDevs.Games.Framework.ECS;
 using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
@@ -9,9 +10,9 @@ public class BunnyDespawning : Component
 
     protected override void Update()
     {
-        if (!Raylib.IsMouseButtonDown(MouseButton.Right)) 
+        if (!Raylib.IsMouseButtonDown(MouseButton.Right))
             return;
-        
+
         // get all bunnies and compile them
         var query = Game.Instance.QueryEntities<Bunny>().Compile();
 
