@@ -1,5 +1,4 @@
-﻿using CopperDevs.Games.ECS;
-using CopperDevs.Games.Framework.ECS;
+﻿using CopperDevs.Games.Framework.ECS;
 using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Bunnymark;

@@ -1,7 +1,5 @@
-using System.Diagnostics.CodeAnalysis;
 using CopperDevs.Games.ECS;
 using CopperDevs.Games.ECS.Systems;
-using CopperDevs.Games.Framework.Data;
 using fennecs;
 
 namespace CopperDevs.Games.Framework;

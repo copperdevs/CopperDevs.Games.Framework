@@ -15,12 +15,12 @@ public partial class Game
         using (window = new EngineWindow(settings))
         {
             OnGameStart?.Invoke();
-            
+
             QueryEntities<ComponentHolder>().Stream().Job(static (ref ComponentHolder holder) => holder.Start());
-            
+
             imGuiRendering = new ImGuiRendering();
 
-            while (!window.ShouldClose)
+            while (!EngineWindow.ShouldClose)
             {
                 gameRenderer.RenderFrame();
             }
@@ -29,7 +29,7 @@ public partial class Game
 
     private void BaseRendering()
     {
-        
+
     }
 
     private void UiRendering()

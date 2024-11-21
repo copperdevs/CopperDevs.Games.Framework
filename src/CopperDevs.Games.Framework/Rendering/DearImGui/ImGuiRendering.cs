@@ -8,7 +8,7 @@ public class ImGuiRendering : Scope
 {
     public ImGuiRendering() => CopperImGui.Setup<RlImGuiRenderer<RlImGuiBinding>>();
 
-    public void Render() => CopperImGui.Render();
+    public static void Render() => CopperImGui.Render();
 
     protected override void CloseScope() => CopperImGui.Shutdown();
 }

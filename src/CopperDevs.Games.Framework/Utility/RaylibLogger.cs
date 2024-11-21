@@ -1,7 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using CopperDevs.Logger;
-using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Utility;
 
@@ -13,18 +12,18 @@ public static class RaylibLogger
     {
         unsafe
         {
-            Raylib.SetTraceLogCallback(&RayLibLog);
-            Raylib.SetTraceLogLevel(TraceLogLevel.All);
+            SetTraceLogCallback(&RayLibLog);
+            SetTraceLogLevel(TraceLogLevel.All);
         }
     }
-    
+
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
     private static unsafe void RayLibLog(TraceLogLevel logLevel, sbyte* rawText, IntPtr args)
     {
         if (HideLogs)
             return;
-        
-        var text = Marshal.PtrToStringUTF8((IntPtr) rawText) ?? string.Empty;;
+
+        var text = Marshal.PtrToStringUTF8((IntPtr)rawText) ?? string.Empty; ;
 
         switch (logLevel)
         {

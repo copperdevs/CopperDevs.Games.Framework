@@ -1,8 +1,5 @@
-﻿using System.Numerics;
-using CopperDevs.Core.Data;
-using CopperDevs.DearImGui;
+﻿using CopperDevs.Core.Data;
 using CopperDevs.DearImGui.Renderer.Raylib.Bindings;
-using Raylib_cs.BleedingEdge;
 using ConfigFlags = CopperDevs.DearImGui.Renderer.Raylib.Bindings.ConfigFlags;
 using GamepadAxis = CopperDevs.DearImGui.Renderer.Raylib.Bindings.GamepadAxis;
 using GamepadButton = CopperDevs.DearImGui.Renderer.Raylib.Bindings.GamepadButton;
@@ -16,7 +13,6 @@ using rlMouseButton = Raylib_cs.BleedingEdge.MouseButton;
 using rlConfigFlags = Raylib_cs.BleedingEdge.ConfigFlags;
 using rlMouseCursor = Raylib_cs.BleedingEdge.MouseCursor;
 using rlGamepadButton = Raylib_cs.BleedingEdge.GamepadButton;
-using rlGamepadAxis = Raylib_cs.BleedingEdge.GamepadAxis;
 
 namespace CopperDevs.Games.Framework.Rendering.DearImGui;
 
@@ -28,7 +24,7 @@ public class RlImGuiBinding : RlBinding
         // CopperImGui.RegisterFieldRenderer<rlTexture2D, Texture2DFieldRenderer>();
         // CopperImGui.RegisterFieldRenderer<RenderTexture2D, RenderTexture2DFieldRenderer>();
     }
-    
+
     public override Texture2D LoadFontTexture(IntPtr data, Vector2Int size)
     {
         unsafe
@@ -41,8 +37,8 @@ public class RlImGuiBinding : RlBinding
                 Mipmaps = 1,
                 Format = PixelFormat.UncompressedR8G8B8A8,
             };
-        
-            var rlTexture = Raylib.LoadTextureFromImage(image);
+
+            var rlTexture = LoadTextureFromImage(image);
 
             return new Texture2D
             {
@@ -62,147 +58,147 @@ public class RlImGuiBinding : RlBinding
 
     public override bool InputIsKeyDown(KeyboardKey key)
     {
-        return Raylib.IsKeyDown((rlKeyboardKey)key);
+        return IsKeyDown((rlKeyboardKey)key);
     }
 
     public override bool WindowIsFocused()
     {
-        return Raylib.IsWindowFocused();
+        return IsWindowFocused();
     }
 
     public override string WindowGetClipboardText()
     {
-        return Raylib.GetClipboardText_();
+        return GetClipboardText_();
     }
 
     public override void WindowSetClipboardText(string text)
     {
-        Raylib.SetClipboardText(text);
+        SetClipboardText(text);
     }
 
     public override bool InputIsMouseButtonPressed(MouseButton button)
     {
-        return Raylib.IsMouseButtonPressed((rlMouseButton)button);
+        return IsMouseButtonPressed((rlMouseButton)button);
     }
 
     public override bool InputIsMouseButtonReleased(MouseButton button)
     {
-        return Raylib.IsMouseButtonReleased((rlMouseButton)button);
+        return IsMouseButtonReleased((rlMouseButton)button);
     }
 
     public override bool WindowIsFullscreen()
     {
-        return Raylib.IsWindowFullscreen();
+        return IsWindowFullscreen();
     }
 
     public override int WindowGetCurrentMonitor()
     {
-        return Raylib.GetCurrentMonitor();
+        return GetCurrentMonitor();
     }
 
     public override int WindowGetMonitorWidth(int monitor)
     {
-        return Raylib.GetMonitorWidth(monitor);
+        return GetMonitorWidth(monitor);
     }
 
     public override int WindowGetMonitorHeight(int monitor)
     {
-        return Raylib.GetMonitorHeight(monitor);
+        return GetMonitorHeight(monitor);
     }
 
     public override int WindowGetScreenWidth()
     {
-        return Raylib.GetScreenWidth();
+        return GetScreenWidth();
     }
 
     public override int WindowGetScreenHeight()
     {
-        return Raylib.GetScreenHeight();
+        return GetScreenHeight();
     }
 
     public override bool WindowIsState(ConfigFlags flag)
     {
-        return Raylib.IsWindowState((rlConfigFlags)flag);
+        return IsWindowState((rlConfigFlags)flag);
     }
 
     public override Vector2 WindowGetScaleDPI()
     {
-        return Raylib.GetWindowScaleDPI();
+        return GetWindowScaleDPI();
     }
 
     public override float TimeGetFrameTime()
     {
-        return Raylib.GetFrameTime();
+        return GetFrameTime();
     }
 
     public override void InputSetMousePosition(int mousePosX, int mousePosY)
     {
-        Raylib.SetMousePosition(mousePosX, mousePosY);
+        SetMousePosition(mousePosX, mousePosY);
     }
 
     public override int InputGetMouseX()
     {
-        return Raylib.GetMouseX();
+        return GetMouseX();
     }
 
     public override int InputGetMouseY()
     {
-        return Raylib.GetMouseY();
+        return GetMouseY();
     }
 
     public override Vector2 InputGetMouseWheelMoveV()
     {
-        return Raylib.GetMouseWheelMoveV();
+        return GetMouseWheelMoveV();
     }
 
     public override void InputHideCursor()
     {
-        Raylib.HideCursor();
+        HideCursor();
     }
 
     public override void InputShowCursor()
     {
-        Raylib.ShowCursor();
+        ShowCursor();
     }
 
     public override void InputSetMouseCursor(MouseCursor value)
     {
-        Raylib.SetMouseCursor((rlMouseCursor)value);
+        SetMouseCursor((rlMouseCursor)value);
     }
 
     public override KeyboardKey InputGetKeyPressed()
     {
-        return (KeyboardKey)Raylib.GetKeyPressed();
+        return (KeyboardKey)GetKeyPressed();
     }
 
     public override bool InputIsKeyReleased(KeyboardKey key)
     {
-        return Raylib.IsKeyPressed((rlKeyboardKey)key);
+        return IsKeyPressed((rlKeyboardKey)key);
     }
 
     public override int InputGetCharPressed()
     {
-        return Raylib.GetCharPressed();
+        return GetCharPressed();
     }
 
     public override bool InputIsGamepadAvailable(int i)
     {
-        return Raylib.IsGamepadAvailable(i);
+        return IsGamepadAvailable(i);
     }
 
     public override bool InputIsGamepadButtonPressed(int i, GamepadButton button)
     {
-        return Raylib.IsGamepadButtonPressed(i, (rlGamepadButton)button);
+        return IsGamepadButtonPressed(i, (rlGamepadButton)button);
     }
 
     public override bool InputIsGamepadButtonReleased(int i, GamepadButton button)
     {
-        return Raylib.IsGamepadButtonReleased(i, (rlGamepadButton)button);
+        return IsGamepadButtonReleased(i, (rlGamepadButton)button);
     }
 
     public override float InputGetGamepadAxisMovement(int i, GamepadAxis axis)
     {
-        return Raylib.IsGamepadButtonReleased(i, (rlGamepadButton)axis);
+        return IsGamepadButtonReleased(i, (rlGamepadButton)axis);
     }
 
     public override void RlGlEnableScissorTest()
