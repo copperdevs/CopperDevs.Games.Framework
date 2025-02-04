@@ -1,3 +1,5 @@
+using CopperDevs.Games.Framework.Utility;
+
 namespace CopperDevs.Games.Framework.Rendering;
 
 public class GameRenderer

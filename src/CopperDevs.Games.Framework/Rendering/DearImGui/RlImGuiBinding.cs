@@ -228,7 +228,7 @@ public class RlImGuiBinding : RlBinding
 
     public override void RlGlBegin(int p0)
     {
-        Rlgl.Begin((DrawMode)p0);
+        Rlgl.Begin((RlglEnum)p0);
     }
 
     public override void RlGlSetTexture(uint textureId)

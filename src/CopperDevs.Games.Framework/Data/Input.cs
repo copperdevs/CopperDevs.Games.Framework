@@ -48,18 +48,18 @@ public static class Input
         {
             // down: 1
             // up: 0
-            var keyDownValue = rlInput.IsKeyDown(key) ? 1 : 0;
+            var keyDownValue = Raylib.IsKeyDown(key) ? 1 : 0;
             return float.IsNaN(keyDownValue) ? 0 : keyDownValue;
         }
     }
 
-    public static bool IsKeyDown(KeyboardKey key) => rlInput.IsKeyDown(key);
+    public static bool IsKeyDown(KeyboardKey key) => Raylib.IsKeyDown(key);
 
-    public static bool IsKeyPressed(KeyboardKey key) => rlInput.IsKeyPressed(key);
+    public static bool IsKeyPressed(KeyboardKey key) => Raylib.IsKeyPressed(key);
 
-    public static bool IsMouseButtonDown(MouseButton key) => rlInput.IsMouseButtonDown(key);
+    public static bool IsMouseButtonDown(MouseButton key) => Raylib.IsMouseButtonDown(key);
 
-    public static bool IsMouseButtonPressed(MouseButton button) => rlInput.IsMouseButtonPressed(button);
+    public static bool IsMouseButtonPressed(MouseButton button) => Raylib.IsMouseButtonPressed(button);
 
-    public static bool IsMouseButtonReleased(MouseButton button) => rlInput.IsMouseButtonReleased(button);
+    public static bool IsMouseButtonReleased(MouseButton button) => Raylib.IsMouseButtonReleased(button);
 }
