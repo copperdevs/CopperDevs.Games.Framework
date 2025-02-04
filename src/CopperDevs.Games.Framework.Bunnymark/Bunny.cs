@@ -1,7 +1,5 @@
 ﻿using System.Numerics;
-using Raylib_CSharp;
-using Raylib_CSharp.Colors;
-using Raylib_CSharp.Windowing;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
@@ -15,13 +13,13 @@ public struct Bunny
 
     public Color Color;
 
-    
+
     // default values are set here instead of in a constructor so when
     // they are mass spawned none of them have the exact same values
     public void SetDefaultValues()
     {
         Raylib.SetRandomSeed((uint)(Random.Shared.Next(int.MinValue, int.MaxValue) - int.MinValue));
-        SetDefaultValues(new Vector2(Raylib.GetRandomValue(0, Window.GetScreenWidth()), Raylib.GetRandomValue(0, Window.GetScreenHeight())));
+        SetDefaultValues(new Vector2(Raylib.GetRandomValue(0, Raylib.GetScreenWidth()), Raylib.GetRandomValue(0, Raylib.GetScreenHeight())));
     }
 
     public void SetDefaultValues(Vector2 position)

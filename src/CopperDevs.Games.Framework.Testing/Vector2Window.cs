@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using CopperDevs.DearImGui;
-using CopperDevs.DearImGui.Attributes;
 using CopperDevs.DearImGui.Rendering;
 
 namespace CopperDevs.Games.Framework.Testing;

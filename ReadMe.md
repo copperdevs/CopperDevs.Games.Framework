@@ -1,3 +1,3 @@
 
 # Game Framework
-> simple framework for making 2d games
+> Simple and to the point 2D games framework

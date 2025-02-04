@@ -2,8 +2,7 @@
 using CopperDevs.Games.ECS.Systems;
 using CopperDevs.Games.Framework.Data;
 using CopperDevs.Games.Framework.Utility;
-using Raylib_CSharp.Textures;
-using Raylib_CSharp.Windowing;
+using Raylib_cs.BleedingEdge;
 
 namespace CopperDevs.Games.Framework.Bunnymark;
 
@@ -17,7 +16,7 @@ public static class Program
         var settings = new EngineSettings
         {
             WindowSize = new Vector2Int(800, 450),
-            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.AlwaysRunWindow | ConfigFlags.VSyncHint | ConfigFlags.ResizableWindow
+            WindowFlags = ConfigFlags.Msaa4XHint | ConfigFlags.WindowAlwaysRun | ConfigFlags.VSyncHint | ConfigFlags.WindowResizable
         };
 
         game = new Game(settings);
@@ -37,7 +36,7 @@ public static class Program
         game.CreateEntity().Add<Bunny>().Spawn(100).Dispose();
 
         // sets random default values for the initial bunnies
-        game.QueryEntities<Bunny>().Stream().Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
+        game.Job(static (ref Bunny bunny) => bunny.SetDefaultValues());
 
         // adds a system for moving each bunny, and a system to render all bunnies
         game.SpawnSystem<BunnyMover, Bunny, SystemTypes.FrameUpdate, StreamTypes.Job>();
@@ -45,5 +44,6 @@ public static class Program
 
         game.AddComponent<UiRendering, StreamTypes.For>(); // simple ui to show how many bunnies, the games fps, and the batched draw calls 
         game.AddComponent<BunnySpawning, StreamTypes.Job>(); // spawn more bunnies on held left click
+        game.AddComponent<BunnyDespawning, StreamTypes.Job>(); // despawn bunnies on right click
     }
 }
